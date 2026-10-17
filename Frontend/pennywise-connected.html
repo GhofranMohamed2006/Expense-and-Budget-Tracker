@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Pennywise – Settings & Categories</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/lucide@0.263.1/dist/umd/lucide.min.js"></script>
+<style>
+:root{--green:#165F34;--blue:#7E98EF;--text2:#4A607C;--muted:#B4BCC9;--card:#F5F5F7;--bg:#E8F8F0;--white:#fff;--navy:#0F1B33;--ink:#14213D;--red:#C0392B;--surface:#fff;--line:#E1E5EC;--shadow:0 1px 3px rgba(15,27,51,.06),0 4px 14px rgba(15,27,51,.04)}
+:root[data-theme="dark"]{--bg:#0C1626;--surface:#16233A;--card:#1B2A44;--ink:#EEF2F8;--text2:#9FB0C8;--line:#2A3B58;--shadow:none}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:var(--bg);color:var(--ink);font-size:14px;padding-top:env(safe-area-inset-top,0px)}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.side{position:fixed;inset:0 auto 0 0;width:240px;background:var(--navy);color:#fff;display:flex;flex-direction:column;padding:22px 14px;z-index:30;transition:transform .2s}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:19px;padding:0 8px 24px}
+.logo{width:34px;height:34px;border-radius:10px;background:var(--green);display:grid;place-items:center}
+.nav{display:flex;flex-direction:column;gap:4px;flex:1}
+.nav a{display:flex;align-items:center;gap:12px;padding:11px 12px;border-radius:10px;color:#B4BCC9;text-decoration:none;font-weight:500;cursor:pointer;border:0;background:none;text-align:left}
+.nav a:hover{background:rgba(255,255,255,.07);color:#fff}
+.nav a.active{background:var(--blue);color:#fff}
+.nav svg,.nav i{width:18px;height:18px}
+.main{margin-left:240px;padding:28px 36px 48px;max-width:1240px}
+.top{display:flex;align-items:flex-start;gap:14px;margin-bottom:22px;flex-wrap:wrap}
+.burger{display:grid;place-items:center;flex:none;padding:4px;margin-top:2px;background:none;border:0;border-radius:0;box-shadow:none;cursor:pointer;color:var(--ink);transition:color .15s}.burger:hover{color:var(--blue);background:none}.burger svg{width:28px;height:28px;stroke-width:2.4}
+.crumb{color:var(--text2);font-size:12.5px;margin-bottom:4px}
+h1{margin:0;font-size:26px;letter-spacing:-.02em}
+.sub{color:var(--text2);margin:4px 0 0}
+.grow{flex:1}
+.btn{display:inline-flex;align-items:center;gap:8px;border:1px solid transparent;border-radius:10px;padding:10px 18px;font-weight:600;cursor:pointer;transition:background .15s,transform .05s}
+.btn:active{transform:translateY(1px)}
+.btn[disabled]{opacity:.5;cursor:not-allowed}
+.btn svg{width:16px;height:16px}
+.pri{background:var(--green);color:#fff}.pri:hover:not([disabled]){background:#0F4A28}
+.sec{background:var(--surface);border-color:var(--line);color:var(--ink)}.sec:hover:not([disabled]){background:var(--card)}
+.dng{background:var(--red);color:#fff}.dng:hover{background:#A02F23}
+.tabs{display:flex;gap:6px;border-bottom:1px solid var(--line);margin-bottom:22px;overflow-x:auto}
+.tab{background:none;border:0;padding:11px 16px;color:var(--text2);font-weight:600;cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-1px;white-space:nowrap}
+.tab:hover{color:var(--ink)}
+.tab.on{color:var(--blue);border-color:var(--blue)}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:24px}
+.prof{display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin-bottom:18px}
+.av{width:68px;height:68px;border-radius:50%;background:var(--navy);color:#fff;display:grid;place-items:center;font-size:23px;font-weight:700}
+.prof h2{margin:0;font-size:19px}.prof p{margin:2px 0 0;color:var(--text2)}
+.meter{width:200px}.meter small{color:var(--text2);display:flex;justify-content:space-between;margin-bottom:5px}
+.bar{height:7px;border-radius:9px;background:var(--card);overflow:hidden}.bar i{display:block;height:100%;background:var(--green);border-radius:9px;transition:width .3s}
+.form{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.f{display:flex;flex-direction:column;gap:6px}.f.full{grid-column:1/-1}
+label,.lbl{font-weight:600;font-size:13px}
+.inp{width:100%;padding:11px 13px;border:1px solid var(--line);border-radius:10px;background:var(--surface);transition:border .15s,box-shadow .15s}
+.inp:hover:not(:disabled){border-color:var(--muted)}
+.inp:focus{outline:0;border-color:var(--blue);box-shadow:0 0 0 3px rgba(126,152,239,.28)}
+.inp:disabled{background:var(--card);color:var(--text2);cursor:not-allowed}
+.inp.bad{border-color:var(--red)}
+.err{color:var(--red);font-size:12px;min-height:0}
+.hint{color:var(--text2);font-size:12px}
+.actions{display:flex;gap:10px;margin-top:22px;flex-wrap:wrap}
+.pw{position:relative}.pw .inp{padding-right:42px}
+.eye{position:absolute;right:6px;top:50%;transform:translateY(-50%);background:none;border:0;padding:7px;color:var(--text2);cursor:pointer;border-radius:8px}
+.eye:hover{background:var(--card)}.eye svg{width:18px;height:18px;display:block}
+.strength{display:flex;gap:5px;margin-top:4px}.strength i{flex:1;height:5px;border-radius:5px;background:var(--card)}
+.toast{padding:11px 14px;border-radius:10px;margin-bottom:16px;font-weight:500;display:none}
+.toast.ok{display:block;background:#DDF3E6;color:var(--green)}
+.toast.no{display:block;background:#FBE4E1;color:var(--red)}
+.note{color:var(--text2);font-size:12px;margin-top:18px}
+.rows{display:flex;flex-direction:column}
+.row{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 0;border-bottom:1px solid var(--line)}
+.row:last-child{border:0}.row b{display:block}.row span{color:var(--text2);font-size:12.5px}
+.tg{width:44px;height:25px;border-radius:20px;border:0;background:var(--muted);position:relative;cursor:pointer;flex:none;transition:background .15s}
+.tg::after{content:"";position:absolute;top:3px;left:3px;width:19px;height:19px;border-radius:50%;background:#fff;transition:transform .15s}
+.tg[aria-checked=true]{background:var(--green)}.tg[aria-checked=true]::after{transform:translateX(19px)}
+.seg{display:inline-flex;background:var(--card);border-radius:10px;padding:3px}
+.seg button{border:0;background:none;padding:8px 16px;border-radius:8px;cursor:pointer;font-weight:600;color:var(--text2)}
+.seg button.on{background:var(--blue);color:#fff}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:18px}
+.cat{background:var(--surface);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:18px;display:flex;flex-direction:column;gap:16px}
+.cat .h{display:flex;gap:14px;align-items:center}
+.ic{width:46px;height:46px;border-radius:12px;display:grid;place-items:center;flex:none}.ic svg{width:22px;height:22px}
+.cat b{font-size:15px;display:block}
+.pill{display:inline-block;margin-top:3px;font-size:11.5px;font-weight:600;padding:2px 9px;border-radius:20px;background:var(--card);color:var(--text2)}
+.cat .f2{display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--line);padding-top:12px;color:var(--text2);font-size:12.5px}
+.ib{background:none;border:1px solid var(--line);border-radius:8px;padding:6px;cursor:pointer;color:var(--text2);margin-left:6px}
+.ib:hover{background:var(--card);color:var(--ink)}.ib.d:hover{color:var(--red);border-color:var(--red)}
+.ib svg{width:15px;height:15px;display:block}
+.empty{text-align:center;color:var(--text2);padding:40px}
+.modal{position:fixed;inset:0;background:rgba(15,27,51,.55);display:none;place-items:center;z-index:50;padding:16px}
+.modal.open{display:grid}
+.box{background:var(--surface);border-radius:16px;padding:24px;width:100%;max-width:420px}
+.box h3{margin:0 0 16px;font-size:18px}
+.sw{display:flex;gap:8px;flex-wrap:wrap}
+.sw button{width:30px;height:30px;border-radius:50%;border:2px solid transparent;cursor:pointer}
+.sw button.on{border-color:var(--ink)}
+.ipick{display:flex;gap:6px;flex-wrap:wrap}
+.ipick button{width:38px;height:38px;border-radius:10px;border:1px solid var(--line);background:var(--surface);cursor:pointer;color:var(--text2)}
+.ipick button.on{border-color:var(--blue);background:rgba(126,152,239,.18);color:var(--blue)}
+.ipick svg{width:18px;height:18px}
+.scrim{display:none}
+.main{transition:margin .2s}
+@media(min-width:901px){body.hide .side{transform:translateX(-100%)}body.hide .main{margin-left:0}}
+@media(max-width:900px){.side{transform:translateX(-100%)}.side.open{transform:none}.main{margin-left:0;padding:20px 16px 40px}.scrim.open{display:block;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:20}.form{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+body.noauth .side,body.noauth .burger,body.noauth .scrim{display:none}body.noauth .main{margin:0 auto;padding-top:60px}
+</style>
+</head>
+<body>
+<aside class="side" id="side">
+  <div class="brand"><span class="logo"><i data-lucide="piggy-bank" style="width:19px;height:19px"></i></span>Pennywise</div>
+  <nav class="nav" id="nav"></nav>
+</aside>
+<div class="scrim" id="scrim"></div>
+<main class="main">
+  <div class="top">
+    <button class="burger" id="burger" aria-label="Open menu"><i data-lucide="menu"></i></button>
+    <div class="grow"><div class="crumb" id="crumb"></div><h1 id="title"></h1><p class="sub" id="sub"></p></div>
+    <div id="topAction"></div>
+  </div>
+  <div id="view"></div>
+</main>
+
+<div class="modal" id="modal"><div class="box" id="box" role="dialog" aria-modal="true"></div></div>
+
+<script>
+const $=(s,r=document)=>r.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const icons=()=>window.lucide&&lucide.createIcons();
+const NAV=[['dashboard','layout-dashboard','Dashboard'],['transactions','arrow-left-right','Transactions'],['budgets','wallet','Budgets'],['categories','tags','Categories'],['reports','bar-chart-3','Reports'],['goals','target','Savings Goals'],['settings','settings','Settings'],['logout','log-out','Logout']];
+let route='settings';
+function drawNav(){
+  $('#nav').innerHTML=NAV.map(([k,i,l])=>`<a data-k="${k}" class="${k===route?'active':''}" ${k===route?'aria-current="page"':''} tabindex="0" style="${k==='logout'?'margin-top:auto':''}"><i data-lucide="${i}"></i>${l}</a>`).join('');
+  icons();
+}
+$('#nav').addEventListener('click',e=>{
+  const a=e.target.closest('a');if(!a)return;
+  const k=a.dataset.k;closeSide();
+  if(k==='settings'||k==='categories'){location.hash='/'+k}
+  else if(k==='logout')logout();
+  else flashNote('This page is outside the prototype.');
+});
+$('#nav').addEventListener('keydown',e=>{if(e.key==='Enter')e.target.click()});
+function flashNote(m){const t=$('#topAction');t.innerHTML=`<span class="toast ok" style="display:block;margin:0">${m}</span>`;setTimeout(()=>{if(t.querySelector('.toast'))t.innerHTML='';render(true)},2600)}
+const closeSide=()=>{$('#side').classList.remove('open');$('#scrim').classList.remove('open')};
+$('#burger').onclick=()=>{
+  if(window.innerWidth>900){const h=document.body.classList.toggle('hide');save('pw_hide',h);$('#burger').setAttribute('aria-expanded',!h)}
+  else{const o=$('#side').classList.toggle('open');$('#scrim').classList.toggle('open',o)}
+};
+$('#scrim').onclick=closeSide;
+
+/* ---------- storage helpers ---------- */
+const load=(k,d)=>{try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}};
+const save=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
+
+/* ---------- API ---------- */
+const API='http://localhost:5000'; // change if your backend runs on another port
+let token=null;try{token=localStorage.getItem('pw_token')}catch(e){}
+async function api(path,{method='GET',body}={}){
+  let res;
+  try{res=await fetch(API+path,{method,headers:{'Content-Type':'application/json',...(token?{Authorization:'Bearer '+token}:{})},body:body?JSON.stringify(body):undefined})}
+  catch(e){throw new Error('Cannot reach the server. Is the API running at '+API+'?')}
+  if(res.status===401&&token&&!path.startsWith('/api/auth')){logout();throw new Error('Session expired. Please sign in again.')}
+  if(res.status===204)return null;
+  const data=await res.json().catch(()=>({}));
+  if(!res.ok){const first=data.errors&&Object.values(data.errors).flat()[0];throw new Error(first||data.title||'Request failed ('+res.status+')')}
+  return data;
+}
+function setToken(t){token=t;try{t?localStorage.setItem('pw_token',t):localStorage.removeItem('pw_token')}catch(e){}}
+function logout(){setToken(null);profile={...defProfile};cats=[];render()}
+const fmtDate=d=>new Date(d).toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});
+const mapProfile=r=>({name:r.fullName,email:r.email,phone:r.phone||'',country:r.country||'',created:fmtDate(r.createdAt)});
+const mapCat=c=>({id:c.id,n:c.name,t:c.type,i:c.icon,c:c.colorIndex,tx:c.transactionCount});
+async function loadCats(){cats=(await api('/api/categories')).map(mapCat)}
+async function loadAll(){
+  try{
+    const[p,pr]=await Promise.all([api('/api/settings/profile'),api('/api/settings/preferences')]);
+    profile=mapProfile(p);draft={...profile};
+    prefs={currency:pr.currency,lang:pr.language,theme:pr.theme,date:pr.dateFormat,emailN:pr.emailNotifications,budgetN:pr.budgetAlerts,monthly:pr.monthlySummary};prefDraft={...prefs};
+    await loadCats();applyTheme();
+  }catch(e){msg=['no',e.message]}
+  render(true);
+}
+let authMode='login',authErr='';
+function authRender(){
+  const r=authMode==='register';
+  $('#crumb').textContent='Pennywise';$('#title').textContent=r?'Create account':'Sign in';$('#sub').textContent='Connect to your Pennywise API.';$('#topAction').innerHTML='';
+  $('#view').innerHTML=`<div class="card" style="max-width:420px">${authErr?`<div class="toast no" role="alert">${esc(authErr)}</div>`:''}
+  <div class="form" style="grid-template-columns:1fr">${r?'<div class="f"><label for="an">Full name</label><input class="inp" id="an" autocomplete="name"></div>':''}
+  <div class="f"><label for="ae">Email</label><input class="inp" id="ae" type="email" autocomplete="email"></div>
+  <div class="f"><label for="ap">Password</label><input class="inp" id="ap" type="password" autocomplete="${r?'new-password':'current-password'}"></div></div>
+  <div class="actions"><button class="btn pri" id="aGo">${r?'Create account':'Sign in'}</button><button class="btn sec" id="aSw">${r?'I have an account':'Create account'}</button></div></div>`;
+  $('#aSw').onclick=()=>{authMode=r?'login':'register';authErr='';authRender()};
+  const go=async()=>{
+    const email=$('#ae').value.trim(),password=$('#ap').value;
+    try{
+      const res=await api(r?'/api/auth/register':'/api/auth/login',{method:'POST',body:r?{fullName:$('#an').value.trim(),email,password}:{email,password}});
+      setToken(res.token);authErr='';render(true);loadAll();
+    }catch(e){authErr=e.message;authRender();$('#ae').value=email}
+  };
+  $('#aGo').onclick=go;$('#view').onkeydown=e=>{if(e.key==='Enter')go()};
+}
+
+/* ---------- Settings ---------- */
+const defProfile={name:'Mariam Hassan',email:'mariam.hassan@example.com',phone:'+20 100 123 4567',country:'Egypt',created:'March 12, 2025'};
+const defPrefs={currency:'EGP',lang:'English',theme:'Light',date:'DD/MM/YYYY',emailN:true,budgetN:true,monthly:false};
+let profile={...defProfile},draft={...profile},editing=false,stab='profile',prefs={...defPrefs},prefDraft={...prefs},msg=null;
+const initials=n=>n.trim().split(/\s+/).slice(0,2).map(w=>w[0]||'').join('').toUpperCase()||'?';
+function applyTheme(){document.documentElement.dataset.theme=prefs.theme==='Dark'?'dark':'light';document.documentElement.dir=prefs.lang==='Arabic'?'rtl':'ltr'}
+const toast=()=>msg?`<div class="toast ${msg[0]}" role="status">${msg[1]}</div>`:'';
+function completion(p){const f=[p.name,p.email,p.phone,p.country];return Math.round(f.filter(x=>x&&x.trim()).length/f.length*100)}
+
+function settingsView(){
+  const tabs=[['profile','Profile'],['password','Change Password'],['prefs','Preferences']];
+  let body='';
+  if(stab==='profile'){
+    const d=draft,dis=editing?'':'disabled',pc=completion(profile);
+    const fld=(id,l,t='text')=>`<div class="f"><label for="${id}">${l}</label><input class="inp" id="${id}" type="${t}" value="${esc(d[id])}" ${dis}><div class="err" id="e_${id}"></div></div>`;
+    body=`<div class="card">${toast()}
+    <div class="prof"><div class="av">${initials(profile.name)}</div><div class="grow"><h2>${esc(profile.name)}</h2><p>${esc(profile.email)}</p></div>
+    <div class="meter"><small><span>Profile completion</span><b>${pc}%</b></small><div class="bar"><i style="width:${pc}%"></i></div></div>
+    <button class="btn sec" id="editBtn" ${editing?'disabled':''}><i data-lucide="pencil"></i>Edit profile</button></div>
+    <hr style="border:0;border-top:1px solid var(--line);margin:0 0 20px">
+    <div class="form">${fld('name','Full name')}${fld('email','Email address','email')}${fld('phone','Phone number','tel')}${fld('country','Country or location')}
+    <div class="f"><label for="created">Account created</label><input class="inp" id="created" value="${esc(profile.created)}" disabled><span class="hint">Read-only</span></div></div>
+    <div class="actions"><button class="btn pri" id="saveP" ${editing?'':'disabled'}>Save changes</button><button class="btn sec" id="cancelP" ${editing?'':'disabled'}>Cancel</button></div>
+    <p class="note">Changes are saved to your Pennywise API.</p></div>`;
+  }else if(stab==='password'){
+    const pf=(id,l)=>`<div class="f"><label for="${id}">${l}</label><div class="pw"><input class="inp" id="${id}" type="password" autocomplete="off"><button type="button" class="eye" data-eye="${id}" aria-label="Show password"><i data-lucide="eye"></i></button></div><div class="err" id="e_${id}"></div></div>`;
+    body=`<div class="card" style="max-width:560px">${toast()}<div class="form" style="grid-template-columns:1fr">${pf('cur','Current password')}
+    <div class="f">${pf('nw','New password')}<div class="strength" id="str"><i></i><i></i><i></i><i></i></div><span class="hint" id="strT">Use 8+ characters with upper and lower case, a number and a symbol.</span></div>
+    ${pf('cf','Confirm new password')}</div>
+    <div class="actions"><button class="btn pri" id="savePw">Update password</button><button class="btn sec" id="clrPw">Clear</button></div>
+    <p class="note">Passwords are sent to your local API (development setup, plain HTTP).</p></div>`;
+  }else{
+    const p=prefDraft;
+    const sel=(id,l,opts)=>`<div class="f"><label for="${id}">${l}</label><select class="inp" id="${id}">${opts.map(o=>`<option ${o===p[id]?'selected':''}>${o}</option>`).join('')}</select></div>`;
+    const tg=(k,t,s)=>`<div class="row"><div><b>${t}</b><span>${s}</span></div><button class="tg" role="switch" aria-checked="${p[k]}" aria-label="${t}" data-tg="${k}"></button></div>`;
+    body=`<div class="card">${toast()}<div class="form">${sel('currency','Preferred currency',['EGP','USD','EUR','GBP'])}${sel('lang','Language',['English','Arabic'])}${sel('date','Date format',['DD/MM/YYYY','MM/DD/YYYY','YYYY-MM-DD'])}
+    <div class="f"><span class="lbl">Theme</span><div class="seg" id="theme">${['Light','Dark'].map(t=>`<button class="${p.theme===t?'on':''}" data-th="${t}">${t}</button>`).join('')}</div></div></div>
+    <div class="rows" style="margin-top:12px">${tg('emailN','Email notifications','Account activity and important updates.')}${tg('budgetN','Budget alerts','Warn me as I approach a budget limit.')}${tg('monthly','Monthly financial summary','A recap of income and spending each month.')}</div>
+    <div class="actions"><button class="btn pri" id="saveF">Save preferences</button><button class="btn sec" id="resetF">Reset</button></div></div>`;
+  }
+  return `<div class="tabs" role="tablist">${tabs.map(([k,l])=>`<button class="tab ${k===stab?'on':''}" role="tab" aria-selected="${k===stab}" data-tab="${k}">${l}</button>`).join('')}</div>${body}`;
+}
+function settingsBind(){
+  const v=$('#view');
+  v.querySelectorAll('[data-tab]').forEach(b=>b.onclick=()=>{stab=b.dataset.tab;msg=null;if(stab==='profile'){editing=false;draft={...profile}}prefDraft={...prefs};render(true)});
+  if(stab==='profile'){
+    $('#editBtn').onclick=()=>{editing=true;msg=null;render(true);$('#name').focus()};
+    ['name','email','phone','country'].forEach(id=>$('#'+id).oninput=e=>draft[id]=e.target.value);
+    $('#cancelP').onclick=()=>{draft={...profile};editing=false;msg=null;render(true)};
+    $('#saveP').onclick=async()=>{
+      const er={};
+      if(draft.name.trim().length<2)er.name='Enter your full name.';
+      if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(draft.email))er.email='Enter a valid email address.';
+      if(draft.phone.trim()&&!/^[+\d][\d\s()-]{6,}$/.test(draft.phone.trim()))er.phone='Enter a valid phone number.';
+      if(!draft.country.trim())er.country='Enter your country or location.';
+      ['name','email','phone','country'].forEach(id=>{$('#e_'+id).textContent=er[id]||'';$('#'+id).classList.toggle('bad',!!er[id])});
+      if(Object.keys(er).length)return;
+      try{const r=await api('/api/settings/profile',{method:'PUT',body:{fullName:draft.name,email:draft.email,phone:draft.phone,country:draft.country}});profile=mapProfile(r);draft={...profile};editing=false;msg=['ok','Profile saved.']}catch(e){msg=['no',e.message]}render(true);
+    };
+  }else if(stab==='password'){
+    v.querySelectorAll('[data-eye]').forEach(b=>b.onclick=()=>{const i=$('#'+b.dataset.eye),s=i.type==='password';i.type=s?'text':'password';b.innerHTML=`<i data-lucide="${s?'eye-off':'eye'}"></i>`;b.setAttribute('aria-label',s?'Hide password':'Show password');icons()});
+    const score=p=>[p.length>=8,/[a-z]/.test(p)&&/[A-Z]/.test(p),/\d/.test(p),/[^A-Za-z0-9]/.test(p)].filter(Boolean).length;
+    const cols=['#C0392B','#E08A2E','#7E98EF','#165F34'],names=['Weak','Fair','Good','Strong'];
+    $('#nw').oninput=e=>{const p=e.target.value,s=p?score(p):0;$('#str').querySelectorAll('i').forEach((b,i)=>b.style.background=i<s?cols[s-1]:'');$('#strT').textContent=p?`Strength: ${names[Math.max(s-1,0)]}`:'Use 8+ characters with upper and lower case, a number and a symbol.'};
+    $('#clrPw').onclick=()=>{msg=null;render(true)};
+    $('#savePw').onclick=async()=>{
+      const c=$('#cur').value,n=$('#nw').value,f=$('#cf').value,er={};
+      if(!c)er.cur='Enter your current password.';
+      if(n.length<8)er.nw='Use at least 8 characters.';else if(score(n)<3)er.nw='Add upper and lower case letters, a number or a symbol.';else if(n===c)er.nw='New password must differ from the current one.';
+      if(f!==n||!f)er.cf='Passwords do not match.';
+      ['cur','nw','cf'].forEach(id=>{$('#e_'+id).textContent=er[id]||'';$('#'+id).classList.toggle('bad',!!er[id])});
+      if(Object.keys(er).length){return}
+      try{await api('/api/settings/password',{method:'POST',body:{currentPassword:c,newPassword:n,confirmPassword:f}});msg=['ok','Password updated.']}catch(e){msg=['no',e.message]}render(true);
+    };
+  }else{
+    v.querySelectorAll('select').forEach(s=>s.onchange=()=>prefDraft[s.id]=s.value);
+    v.querySelectorAll('[data-tg]').forEach(b=>b.onclick=()=>{prefDraft[b.dataset.tg]=!prefDraft[b.dataset.tg];b.setAttribute('aria-checked',prefDraft[b.dataset.tg])});
+    v.querySelectorAll('[data-th]').forEach(b=>b.onclick=()=>{prefDraft.theme=b.dataset.th;v.querySelectorAll('[data-th]').forEach(x=>x.classList.toggle('on',x===b))});
+    $('#saveF').onclick=async()=>{try{const p=prefDraft;await api('/api/settings/preferences',{method:'PUT',body:{currency:p.currency,language:p.lang,theme:p.theme,dateFormat:p.date,emailNotifications:p.emailN,budgetAlerts:p.budgetN,monthlySummary:p.monthly}});prefs={...prefDraft};applyTheme();msg=['ok','Preferences saved.']}catch(e){msg=['no',e.message]}render(true)};
+    $('#resetF').onclick=()=>{prefDraft={...prefs};msg=null;render(true)};
+  }
+}
+
+/* ---------- Categories ---------- */
+const PAL=[['#E3F4EA','#165F34'],['#E6ECFC','#4A62C9'],['#FDEFD9','#B7701A'],['#F6E4EE','#A8386F'],['#E4F3F6','#237A8C'],['#EDE7F8','#6B4BB5'],['#E9ECF1','#4A607C']];
+const ICONS=['utensils','car','shopping-bag','receipt','heart-pulse','graduation-cap','clapperboard','briefcase','laptop','home','plane','gift','coffee','more-horizontal'];
+let cats=[];
+let ctab='expense',nid=100,form=null;
+function categoriesView(){
+  const list=cats.filter(c=>c.t===ctab);
+  return `<div class="tabs" role="tablist">${[['expense','Expense Categories'],['income','Income Categories']].map(([k,l])=>`<button class="tab ${k===ctab?'on':''}" role="tab" aria-selected="${k===ctab}" data-ct="${k}">${l} (${cats.filter(c=>c.t===k).length})</button>`).join('')}</div>
+  ${list.length?`<div class="grid">${list.map(c=>`<article class="cat"><div class="h"><div class="ic" style="background:${PAL[c.c][0]};color:${PAL[c.c][1]}"><i data-lucide="${c.i}"></i></div><div class="grow"><b>${esc(c.n)}</b><span class="pill">${c.t==='expense'?'Expense':'Income'}</span></div></div>
+  <div class="f2"><span>${c.tx} transactions</span><span><button class="ib" data-ed="${c.id}" aria-label="Edit ${esc(c.n)}"><i data-lucide="pencil"></i></button><button class="ib d" data-del="${c.id}" aria-label="Delete ${esc(c.n)}"><i data-lucide="trash-2"></i></button></span></div></article>`).join('')}</div>`
+  :`<div class="card empty">No ${ctab} categories yet. Add one to start organizing transactions.</div>`}`;
+}
+function openModal(h){$('#box').innerHTML=h;$('#modal').classList.add('open');icons()}
+function closeModal(){$('#modal').classList.remove('open')}
+$('#modal').addEventListener('click',e=>{if(e.target.id==='modal')closeModal()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+function catForm(c){
+  form=c?{...c}:{id:null,n:'',t:ctab,i:'tags',c:0,tx:0};
+  const draw=()=>{
+    openModal(`<h3>${c?'Edit category':'Add category'}</h3>
+    <div class="f"><label for="cn">Name</label><input class="inp" id="cn" value="${esc(form.n)}" maxlength="30"><div class="err" id="ce"></div></div>
+    <div class="f" style="margin-top:14px"><span class="lbl">Type</span><div class="seg">${['expense','income'].map(t=>`<button data-t="${t}" class="${form.t===t?'on':''}">${t==='expense'?'Expense':'Income'}</button>`).join('')}</div></div>
+    <div class="f" style="margin-top:14px"><span class="lbl">Icon</span><div class="ipick">${ICONS.map(i=>`<button data-i="${i}" class="${form.i===i?'on':''}" aria-label="${i}"><i data-lucide="${i}"></i></button>`).join('')}</div></div>
+    <div class="f" style="margin-top:14px"><span class="lbl">Color</span><div class="sw">${PAL.map((p,k)=>`<button data-c="${k}" class="${form.c===k?'on':''}" style="background:${p[1]}" aria-label="Color ${k+1}"></button>`).join('')}</div></div>
+    <div class="actions"><button class="btn pri" id="cs">${c?'Save changes':'Add category'}</button><button class="btn sec" id="cx">Cancel</button></div>`);
+    const b=$('#box');
+    b.querySelectorAll('[data-t]').forEach(x=>x.onclick=()=>{form.n=$('#cn').value;form.t=x.dataset.t;draw()});
+    b.querySelectorAll('[data-i]').forEach(x=>x.onclick=()=>{form.n=$('#cn').value;form.i=x.dataset.i;draw()});
+    b.querySelectorAll('[data-c]').forEach(x=>x.onclick=()=>{form.n=$('#cn').value;form.c=+x.dataset.c;draw()});
+    $('#cx').onclick=closeModal;
+    $('#cs').onclick=async()=>{
+      const n=$('#cn').value.trim();form.n=n;
+      if(!n){$('#ce').textContent='Enter a category name.';$('#cn').classList.add('bad');return}
+      if(cats.some(x=>x.id!==form.id&&x.t===form.t&&x.n.toLowerCase()===n.toLowerCase())){$('#ce').textContent='A category with this name already exists.';return}
+      try{const body={name:n,type:form.t,icon:form.i,colorIndex:form.c};if(form.id)await api('/api/categories/'+form.id,{method:'PUT',body});else await api('/api/categories',{method:'POST',body});await loadCats();
+      ctab=form.t;closeModal();render(true)}catch(e){$('#ce').textContent=e.message}
+    };
+    $('#cn').focus();
+  };
+  draw();
+}
+function catBind(){
+  $('#view').querySelectorAll('[data-ct]').forEach(b=>b.onclick=()=>{ctab=b.dataset.ct;render(true)});
+  $('#view').querySelectorAll('[data-ed]').forEach(b=>b.onclick=()=>catForm(cats.find(c=>c.id==b.dataset.ed)));
+  $('#view').querySelectorAll('[data-del]').forEach(b=>b.onclick=()=>{
+    const c=cats.find(x=>x.id==b.dataset.del);
+    openModal(`<h3>Delete “${esc(c.n)}”?</h3><p class="sub">${c.tx} transactions use this category. This cannot be undone.</p><div class="actions"><button class="btn dng" id="yes">Delete category</button><button class="btn sec" id="no">Cancel</button></div>`);
+    $('#no').onclick=closeModal;$('#yes').onclick=async()=>{try{await api('/api/categories/'+c.id,{method:'DELETE'});await loadCats();closeModal();render(true)}catch(e){$('#box').querySelector('.sub').textContent=e.message}};
+  });
+}
+
+/* ---------- router ---------- */
+function render(keep){
+  document.body.classList.toggle('noauth',!token);
+  if(!token){authRender();return}
+  route=location.hash.includes('categories')?'categories':'settings';
+  drawNav();
+  if(route==='settings'){
+    $('#crumb').textContent='Pennywise / Settings';$('#title').textContent='Settings';$('#sub').textContent='Manage your account and preferences.';$('#topAction').innerHTML='';
+    $('#view').innerHTML=settingsView();settingsBind();
+  }else{
+    $('#crumb').textContent='Pennywise / Categories';$('#title').textContent='Categories';$('#sub').textContent='Manage your income and expense categories.';
+    $('#topAction').innerHTML='<button class="btn pri" id="addC"><i data-lucide="plus"></i>Add category</button>';
+    $('#addC').onclick=()=>catForm();
+    $('#view').innerHTML=categoriesView();catBind();
+  }
+  icons();
+}
+window.addEventListener('hashchange',()=>{msg=null;render()});
+if(load('pw_hide',false))document.body.classList.add('hide');
+applyTheme();render();if(token)loadAll();
+</script>
+</body>
+</html>
