@@ -1,89 +1,215 @@
-# 💰 Expense & Budget Tracker
+# 💰 Pennywise — Expense & Budget Tracker
 
-**A Personal Finance Management Web Application**
+### Make Every Pound Count.
 
-Expense & Budget Tracker is a web application designed to help users manage their personal finances, track income and expenses, organize financial transactions, and gain a clearer understanding of their spending habits.
+Pennywise is a personal finance management web application designed to help users track income and expenses, manage monthly budgets, organize transactions, analyze spending habits, and monitor savings goals through one centralized platform.
 
-The project brings together frontend development, backend services, authentication, and financial management features in a modular application architecture.
+The project is developed collaboratively, with separate modules integrated into a unified application.
 
-🔗 **Repository:** [Expense-and-Budget-Tracker](https://github.com/GhofranMohamed2006/Expense-and-Budget-Tracker)
+**Repository:** [Expense-and-Budget-Tracker](https://github.com/GhofranMohamed2006/Expense-and-Budget-Tracker)
 
 ---
 
-## 📌 Table of Contents
+## 📑 Table of Contents
 
-- [Overview](#-overview)
-- [Features](#-features)
+- [About the Project](#-about-the-project)
+- [Project Objectives](#-project-objectives)
+- [Application Features](#-application-features)
 - [Technology Stack](#-technology-stack)
-- [Project Modules](#-project-modules)
+- [Application Architecture](#-application-architecture)
 - [Project Structure](#-project-structure)
-- [Prerequisites](#-prerequisites)
+- [Database Overview](#-database-overview)
 - [Getting Started](#-getting-started)
 - [Configuration](#-configuration)
-- [Team Collaboration](#-team-collaboration)
-- [Contributing](#-contributing)
-- [Security](#-security)
+- [Team Workflow](#-team-workflow)
+- [Development Guidelines](#-development-guidelines)
+- [Security Considerations](#-security-considerations)
+- [Testing](#-testing)
+- [Future Improvements](#-future-improvements)
+- [Contributors](#-contributors)
 - [License](#-license)
 
 ---
 
-## 🎯 Overview
+## 📌 About the Project
 
-Managing personal finances can be challenging without a clear view of income, expenses, and financial goals.
+Managing personal finances requires a clear understanding of income, expenses, budgets, and financial goals.
 
-Expense & Budget Tracker aims to simplify this process by providing a centralized platform for organizing financial information and monitoring spending.
+Pennywise aims to make this process easier by providing a structured application where users can organize financial activities, understand their spending patterns, and plan their money more effectively.
 
-The application is organized into dedicated modules to support maintainability, collaboration, and future development.
+The application is designed around a modular architecture, separating frontend interfaces, backend business logic, authentication, and data persistence.
 
-### Project Goals
+### The Problem
 
-- Simplify personal income and expense tracking.
-- Help users organize and monitor their financial activities.
-- Provide a foundation for budget planning and financial analysis.
-- Offer a user-friendly and organized interface.
-- Apply software development best practices through modular architecture and version control.
+People often struggle to:
+
+- Keep track of daily income and expenses.
+- Understand where their money goes.
+- Stay within monthly spending limits.
+- Compare financial activity over time.
+- Set savings goals and monitor progress.
+
+### The Solution
+
+Pennywise brings these activities together in one application, providing a foundation for better financial organization and more informed decisions.
 
 ---
 
-## ✨ Features
+## 🎯 Project Objectives
 
-### 🔐 Authentication & User Access
+The main objectives are to:
 
-- User registration interface.
-- User login interface.
-- Backend authentication services.
-- Input validation and authentication-related error handling.
-- Organized authentication controllers, services, and repositories.
+1. Build a centralized personal finance management application.
+2. Provide secure user registration and authentication.
+3. Organize income and expenses into manageable transactions.
+4. Support monthly budgets and spending categories.
+5. Present financial summaries and reports.
+6. Help users define and monitor savings goals.
+7. Build a maintainable application using modular development practices.
+8. Enable collaborative development through Git and GitHub.
 
-### 📊 Dashboard
+---
 
-Designed to provide a central overview of personal financial information, including income, expenses, and available balance.
+## ✨ Application Features
 
-### 💳 Transaction Management
+The following sections describe the project's overall feature scope. Individual features should be considered complete only after their implementation has been integrated and tested.
 
-A dedicated module for organizing financial transactions and distinguishing between income and expenses.
+### 1. 🏠 Landing Page
 
-### 📅 Budget Management
+The public landing page introduces Pennywise and explains its purpose.
 
-A dedicated section for planning budgets and monitoring spending against financial limits.
+Expected functionality:
 
-### 🗂️ Category Management
+- Project branding and navigation.
+- Overview of the main application features.
+- Clear calls to action for registration and login.
+- Responsive layout for desktop and mobile devices.
 
-Organize financial activities into categories to make transactions easier to understand and analyze.
+### 2. 🔐 Authentication & User Management
 
-### 📈 Reports & Analytics
+Provides the foundation for user access and account management.
 
-A reporting section designed to present financial summaries and visual insights into spending patterns.
+Expected functionality:
 
-### 🎯 Saving Goals
+- User registration.
+- Login and logout.
+- Input validation and authentication error handling.
+- Secure password storage.
+- Session management.
+- User-specific access to protected application pages.
+- Account recovery and optional third-party authentication when configured.
 
-A dedicated module for organizing and tracking personal savings goals.
+### 3. 📊 Dashboard
 
-### ⚙️ Profile & Settings
+Provides a central overview of a user's financial activity.
 
-A dedicated area for managing user profile information and application preferences.
+Expected information:
 
-> **Note:** The modules above describe the project's overall scope. The availability and integration of individual features depend on the current implementation and the progress of each development branch.
+- Total income.
+- Total expenses.
+- Available balance.
+- Savings goal progress.
+- Recent transactions.
+- Budget summaries.
+- Financial charts and trends.
+
+Dashboard values should be calculated from the user's actual stored records.
+
+### 4. 💳 Transaction Management
+
+Allows users to organize their financial activity.
+
+Expected functionality:
+
+- Add income and expense transactions.
+- View transaction history.
+- Edit transaction details.
+- Delete transactions with confirmation.
+- Assign categories.
+- Search and filter transactions.
+- Sort records by date, amount, or other supported fields.
+- Filter by transaction type and date range.
+
+### 5. 📅 Budget Management
+
+Supports planning and monitoring spending limits.
+
+Expected functionality:
+
+- Create monthly budgets.
+- Assign budgets to expense categories.
+- Edit and delete budgets.
+- Calculate spending against budget limits.
+- Display remaining budget amounts.
+- Track budget utilization and progress.
+
+### 6. 🗂️ Category Management
+
+Organizes financial transactions into meaningful groups.
+
+Examples include:
+
+**Expense categories**
+- Food & Drinks
+- Transportation
+- Shopping
+- Bills
+- Healthcare
+- Education
+- Entertainment
+- Housing
+
+**Income categories**
+- Salary
+- Freelancing
+- Investments
+- Gifts
+- Other Income
+
+Users should be able to manage supported categories without accessing another user's private records.
+
+### 7. 📈 Reports & Analytics
+
+Helps users understand their financial habits through summaries and reports.
+
+Planned capabilities include:
+
+- Income versus expenses.
+- Spending by category.
+- Monthly financial summaries.
+- Spending trends over time.
+- Date-range filtering.
+- Report export where implemented.
+
+Reports should use consistent date ranges and real database records.
+
+### 8. 🎯 Saving Goals
+
+Helps users organize and monitor personal savings objectives.
+
+Expected functionality:
+
+- Create savings goals.
+- Set a target amount.
+- Set an optional target date.
+- Record savings contributions.
+- Track saved amounts and progress.
+- Edit and delete goals.
+- View contribution history where supported.
+
+### 9. ⚙️ Profile & Settings
+
+Provides a place for users to manage their account preferences.
+
+Potential settings include:
+
+- Profile information.
+- Preferred currency.
+- Theme preferences.
+- Language preferences.
+- Account and authentication settings.
+
+Only settings supported by the integrated implementation should be considered available.
 
 ---
 
@@ -92,258 +218,468 @@ A dedicated area for managing user profile information and application preferenc
 | Technology | Purpose |
 |---|---|
 | C# | Backend application logic |
-| ASP.NET Core | Backend services and HTTP endpoints |
-| HTML5 | Frontend structure |
-| CSS3 | Styling and responsive layouts |
-| JavaScript | Frontend interactions and API communication |
-| SQL / SQLite | Relational data storage where configured |
+| .NET | Backend runtime and project tooling |
+| ASP.NET Core | Used by the separate authentication module where configured |
+| HTML5 | Frontend page structure |
+| CSS3 | Layout, styling, and responsive design |
+| Vanilla JavaScript | Frontend interactions and API communication |
+| SQLite | Relational database storage where configured |
 | Git | Version control |
-| GitHub | Source code hosting and team collaboration |
-| Visual Studio / Visual Studio Code | Development tools |
+| GitHub | Repository hosting and collaboration |
+| Visual Studio / Visual Studio Code | Development environment |
 
-The authentication module uses a C# backend with separated controllers, interfaces, models, repositories, security components, and services.
-
-The frontend uses HTML, CSS, and JavaScript to provide the user interface.
+**Architecture note:** The team should confirm and document the final backend hosting approach during integration. The main application and the separate authentication module may use different server implementations until their integration is completed.
 
 ---
 
-## 🧩 Project Modules
+## 🏗️ Application Architecture
 
-The application is organized around the following functional areas:
+Pennywise is organized into three main application layers.
 
-| Module | Responsibility |
-|---|---|
-| Authentication | Registration and login |
-| Dashboard | Overview of financial activity |
-| Transactions | Income and expense records |
-| Budgets | Budget planning and monitoring |
-| Categories | Financial transaction classification |
-| Reports & Analytics | Financial summaries and insights |
-| Saving Goals | Personal savings tracking |
-| Profile & Settings | User preferences and profile management |
+### Frontend Layer
 
-Each module can be developed and reviewed independently before being integrated into the main application.
+Responsible for:
+
+- Rendering pages and forms.
+- Handling user interactions.
+- Validating inputs before submission.
+- Communicating with backend endpoints.
+- Displaying financial summaries, tables, and charts.
+- Showing loading, empty, success, and error states.
+
+### Backend Layer
+
+Responsible for:
+
+- Handling HTTP requests.
+- Validating incoming data.
+- Implementing business rules.
+- Managing authentication and authorization.
+- Processing financial transactions.
+- Coordinating database operations.
+- Returning structured API responses.
+
+### Data Layer
+
+Responsible for:
+
+- Persisting user accounts and settings.
+- Storing transactions, categories, budgets, and goals.
+- Enforcing relationships and data integrity.
+- Supporting reliable financial calculations.
+- Isolating each user's financial records.
+
+### Typical Request Flow
+
+```text
+User
+  |
+  v
+Frontend (HTML / CSS / JavaScript)
+  |
+  v
+HTTP API
+  |
+  v
+Backend Services
+  |
+  v
+Repositories / Data Access
+  |
+  v
+SQLite Database
+```
 
 ---
 
 ## 📂 Project Structure
 
-The repository contains the main application and its supporting files. The authentication module follows a structure similar to the one below:
+The following is a proposed logical structure for the complete project. Adapt the paths to the actual repository as the team integrates its modules.
 
 ```text
 Expense-and-Budget-Tracker/
 │
-├── Login & Register/
-│   ├── Backend/
-│   │   ├── Controllers/
-│   │   ├── Interfaces/
-│   │   ├── Models/
-│   │   ├── Repositories/
-│   │   ├── Routes/
-│   │   ├── Security/
-│   │   ├── Services/
-│   │   ├── Utils/
-│   │   ├── PennywiseAuth.csproj
-│   │   └── Program.cs
-│   │
-│   ├── Frontend/
-│   │   ├── index.html
-│   │   ├── login.html
-│   │   ├── register.html
-│   │   ├── dashboard.html
-│   │   ├── CSS/
-│   │   ├── JS/
-│   │   └── assets/
-│   │
-│   ├── PennywiseAuth.sln
-│   └── README.md
+├── README.md
+├── .gitignore
 │
-└── README.md
+├── docs/
+│   ├── project-structure.md
+│   ├── api-contracts.md
+│   └── testing-checklist.md
+│
+├── Frontend/
+│   ├── index.html
+│   ├── login.html
+│   ├── register.html
+│   ├── dashboard.html
+│   ├── assets/
+│   ├── css/
+│   └── js/
+│
+├── Backend/
+│   ├── Controllers/
+│   ├── Routes/
+│   ├── Interfaces/
+│   ├── Models/
+│   ├── Repositories/
+│   ├── Services/
+│   ├── Security/
+│   ├── Utils/
+│   ├── Program.cs
+│   └── Backend.csproj
+│
+├── Database/
+│   ├── schema.sql
+│   └── migrations/
+│
+└── tests/
+    ├── api/
+    └── manual-test-cases.md
 ```
 
-*The structure is illustrative; directory names and locations may differ as team modules are integrated.*
+**Important:** This tree is a reference for the integrated application, not a claim that every directory or file already exists. Preserve existing working files and agree on shared paths before merging team branches.
 
 ---
 
-## ⚙️ Prerequisites
+## 🗄️ Database Overview
 
-Before running the application, make sure you have the following installed:
+The database should support the main application entities.
+
+| Entity | Purpose |
+|---|---|
+| Users | Account information and authentication identifiers |
+| Sessions | Active login sessions, if session-based authentication is used |
+| Categories | Income and expense classifications |
+| Transactions | Income and expense records |
+| Budgets | Monthly spending limits |
+| SavingGoals | Savings targets and progress |
+| SavingGoalContributions | Individual savings contributions, if implemented |
+| UserSettings | Currency and application preferences |
+
+### Data Integrity Principles
+
+- Each user's private records must be associated with the correct user.
+- Transactions must reference valid categories.
+- Budgets must use valid expense categories.
+- Financial amounts must be validated.
+- Database operations should use parameterized queries.
+- Related records should remain consistent when edited or deleted.
+- Monetary calculations should use a consistent numeric representation.
+
+The actual database schema must be documented once the final schema and migrations are confirmed.
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+Install the tools required by the final project configuration:
 
 - [.NET SDK](https://dotnet.microsoft.com/download)
 - [Git](https://git-scm.com/downloads)
-- [Visual Studio](https://visualstudio.microsoft.com/) or [Visual Studio Code](https://code.visualstudio.com/)
+- [Visual Studio Code](https://code.visualstudio.com/) or Visual Studio
 - A modern web browser
 
-Use the .NET SDK version required by the project's configuration.
-
-Verify your installation:
+Check your installations:
 
 ```bash
 dotnet --version
 git --version
 ```
 
----
-
-## 🚀 Getting Started
-
 ### 1. Clone the Repository
 
 ```bash
 git clone https://github.com/GhofranMohamed2006/Expense-and-Budget-Tracker.git
-```
-
-### 2. Navigate to the Project
-
-```bash
 cd Expense-and-Budget-Tracker
 ```
 
-### 3. Switch to the Appropriate Branch
-
-To access the login and registration work, use the dedicated branch:
+### 2. Fetch the Latest Branches
 
 ```bash
 git fetch origin
+git branch -a
+```
+
+Switch to the branch agreed upon by the team. For example, to inspect the login and registration branch:
+
+```bash
 git switch --track origin/login--register
 ```
 
-If you already have the branch locally, use:
+If that branch already exists locally:
 
 ```bash
 git switch login--register
 ```
 
-### 4. Restore Backend Dependencies
+Use the integration branch selected by the team when running the complete application.
 
-Navigate to the authentication backend directory:
+### 3. Locate the Backend Project
+
+Find the actual `.csproj` file before restoring dependencies.
+
+For example, if the project file is located in `Backend`:
 
 ```bash
-cd "Login & Register/Backend"
+cd Backend
 dotnet restore
 ```
 
+If the project uses a solution file, restore from the directory containing that solution instead:
+
+```bash
+dotnet restore YourSolution.sln
+```
+
+Replace the example solution name with the actual file name.
+
+### 4. Configure the Application
+
+Review the backend configuration and set the required database path, server port, API settings, and authentication configuration.
+
+Do not commit secrets or production credentials.
+
 ### 5. Run the Backend
 
-From the backend directory, run:
+From the directory containing the backend project:
 
 ```bash
 dotnet run
 ```
 
-Follow the terminal output to identify the address and port on which the backend is listening.
+Follow the terminal output to identify the configured local address and port.
 
-If your local folder or project file is located elsewhere, adjust the path accordingly.
+### 6. Start the Frontend
 
-### 6. Open the Frontend
+Use the frontend serving method specified by the integrated application.
 
-Open the appropriate frontend HTML page in your browser, or serve the frontend through the development setup configured for the project.
+If the backend serves the frontend files itself, start the backend and open its local address in your browser.
 
-If the frontend communicates with the backend, make sure its API base URL matches the backend's configured address and port.
+If the frontend is served separately, configure its API base URL to match the backend address and port.
 
-> **Important:** The backend and frontend must use compatible API URLs and configuration. A page opened directly from the filesystem may not work correctly if the application requires a web server, authentication cookies, or configured API routes.
+### 7. Verify the Application
+
+After startup, verify that:
+
+- The landing page loads.
+- Registration and login behave correctly.
+- Protected pages require authentication.
+- API requests reach the backend.
+- Financial records persist in the configured database.
+- Errors are displayed clearly.
+- The browser console and backend logs do not show unexpected errors.
+
+Exact startup commands may change when the team finalizes the integrated solution structure.
 
 ---
 
 ## 🔧 Configuration
 
-Before running the application, review the project's configuration files.
+Configuration depends on the selected backend and authentication implementation.
 
-Depending on the current implementation, configuration may include:
+Potential configuration values include:
 
-- Backend listening address and port.
-- Database connection settings.
-- Frontend API base URL.
-- Authentication settings.
-- Environment-specific application settings.
+| Setting | Purpose |
+|---|---|
+| `PORT` | Server listening port, if supported |
+| `SQLITE_PATH` | Database file location, if supported |
+| `APP_BASE_URL` | Public or local application URL |
+| `GOOGLE_CLIENT_ID` | Google authentication configuration, if implemented |
+| `GOOGLE_CLIENT_SECRET` | Server-side OAuth configuration, if required |
+| SMTP settings | Email delivery for recovery flows, if implemented |
 
-Keep credentials, connection strings containing passwords, API keys, and other secrets out of source control.
+Use environment variables or local configuration for sensitive values. Do not place real credentials in this README.
 
-Use local configuration or environment variables for sensitive values, and provide safe example settings when documentation requires them.
+Provide an example configuration file with placeholder values if the team needs one.
 
 ---
 
-## 🤝 Team Collaboration
+## 👥 Team Workflow
 
-This project uses Git and GitHub to support collaborative development.
+The project is developed collaboratively using Git and GitHub.
 
-### Branching Workflow
+### Branching Strategy
 
 Each contributor should work on a dedicated feature branch.
 
 Example:
 
 ```bash
-git switch -c feature/your-feature-name
+git switch -c feature/transactions
 ```
 
-After completing the work:
+Other possible branch names include:
+
+```text
+feature/authentication
+feature/dashboard
+feature/budgets
+feature/categories
+feature/reports
+feature/saving-goals
+feature/profile-settings
+```
+
+Use the actual branch names agreed upon by the team.
+
+### Commit Changes
 
 ```bash
 git add .
-git commit -m "Describe your changes"
-git push -u origin feature/your-feature-name
+git commit -m "Implement transaction management"
+git push -u origin feature/transactions
 ```
 
-### Pull Request Workflow
+### Pull Request Process
 
-1. Push your feature branch to GitHub.
-2. Open a Pull Request targeting the branch agreed upon by the team.
-3. Describe the changes and affected modules.
-4. Allow teammates to review the code.
-5. Address review comments and requested changes.
-6. Merge the Pull Request after approval and when the team agrees the changes are ready.
+1. Complete the assigned module.
+2. Test the module locally.
+3. Push the feature branch to GitHub.
+4. Open a Pull Request against the team's agreed target branch.
+5. Describe the changes and any dependencies.
+6. Request review from the appropriate teammates.
+7. Resolve review comments and conflicts.
+8. Merge only after the team agrees that the changes are ready.
 
-Avoid pushing unfinished work directly to the main branch unless the team explicitly agrees otherwise.
+### Integration Guidelines
+
+Before merging modules:
+
+- Agree on API routes and request/response formats.
+- Use consistent naming for database entities and fields.
+- Avoid duplicate authentication or database implementations.
+- Coordinate changes to shared files.
+- Test dependencies between frontend and backend.
+- Confirm that the integrated project starts successfully.
+
+**Do not merge every branch directly into `main` automatically.** Follow the repository's agreed review and integration process.
 
 ---
 
-## 🧑‍💻 Contributing
+## 🧑‍💻 Development Guidelines
 
-Contributions and improvements are welcome from project team members.
+To maintain code quality across the team:
 
-When contributing:
-
-- Follow the existing project structure and coding conventions.
-- Keep changes focused on the relevant module.
-- Test your changes before opening a Pull Request.
-- Avoid committing generated build files, local databases, or secrets.
+- Follow consistent naming conventions.
+- Keep controllers and routes focused on HTTP handling.
+- Place reusable business logic in services.
+- Separate database access from business logic where appropriate.
+- Validate data on the server, not only in the browser.
+- Keep frontend API communication consistent.
+- Avoid duplicating shared components and utility functions.
+- Document API changes.
 - Write clear commit messages.
-- Document new configuration requirements and setup steps.
-- Coordinate API changes with teammates working on dependent modules.
+- Keep generated build artifacts out of source control.
 
 ---
 
-## 🔒 Security
+## 🔒 Security Considerations
 
-Security is particularly important for applications that handle financial information.
+Because Pennywise handles personal and financial information, security must be considered throughout development.
 
 Recommended practices include:
 
-- Validate user input on the backend.
-- Use secure password-handling mechanisms.
-- Protect authenticated endpoints.
-- Avoid exposing sensitive information in error messages.
-- Keep secrets out of the repository.
-- Use HTTPS in production deployments.
-- Review authentication and authorization behavior before release.
+- Secure password hashing.
+- Proper authentication and authorization.
+- User-specific access control for all financial records.
+- Parameterized database queries.
+- Input validation and safe error handling.
+- Secure session handling and cookie configuration.
+- Protection against unauthorized access to other users' records.
+- No hardcoded secrets or credentials.
+- HTTPS for production deployment.
+- Safe handling of personal information in logs.
 
-These practices are recommendations and should not be interpreted as confirmation that every security control has already been implemented.
+These are security requirements and recommendations, not a certification that every control has already been implemented.
+
+---
+
+## 🧪 Testing
+
+Testing should cover each module independently and the integrated application.
+
+### Authentication
+
+- Register a new account.
+- Reject duplicate email addresses.
+- Test valid and invalid login attempts.
+- Verify logout and session behavior.
+- Verify protected endpoints reject unauthorized requests.
+
+### Transactions
+
+- Create, edit, search, filter, and delete transactions.
+- Validate amounts and required fields.
+- Verify totals update after changes.
+
+### Budgets & Categories
+
+- Create and update budgets.
+- Verify budget utilization against transactions.
+- Validate category assignments.
+- Ensure users cannot access another user's records.
+
+### Saving Goals
+
+- Create a savings goal.
+- Record contributions where supported.
+- Verify totals and progress calculations.
+- Reject invalid amounts.
+
+### Dashboard & Reports
+
+- Verify summaries against stored transactions.
+- Check date ranges and category totals.
+- Confirm charts use real application data.
+- Verify empty states when there are no transactions.
+
+### Integration
+
+- Confirm frontend requests match backend routes.
+- Confirm database persistence after restart.
+- Check navigation between pages.
+- Check browser console and server logs.
+- Test the integrated branch after every major merge.
+
+Document the tests that have actually been executed and their results.
+
+---
+
+## 🛣️ Future Improvements
+
+Potential future enhancements include:
+
+- Advanced spending analytics.
+- CSV export and import.
+- Recurring transactions.
+- Notifications for budget limits.
+- Improved financial reporting.
+- Additional currency and localization support.
+- Automated testing and continuous integration.
+- Deployment and monitoring improvements.
+
+These enhancements are ideas for future development and are not necessarily implemented in the current version.
+
+---
+
+## 👨‍💻 Contributors
+
+Pennywise is a collaborative software development project.
+
+Repository contributors can be viewed on the [GitHub contributors page](https://github.com/GhofranMohamed2006/Expense-and-Budget-Tracker/graphs/contributors).
 
 ---
 
 ## 📄 License
 
-No license has been specified in this README. Add a `LICENSE` file and update this section once the project owners decide how the source code may be used, modified, and distributed.
+A license has not yet been specified in this README. The repository owners should select an appropriate license and add a `LICENSE` file before defining the project's distribution terms.
 
 ---
 
-## 👥 Project Team
+### 💚 Pennywise
 
-Developed collaboratively by the project contributors.
+**Make Every Pound Count.**
 
-**Repository:** [GhofranMohamed2006/Expense-and-Budget-Tracker](https://github.com/GhofranMohamed2006/Expense-and-Budget-Tracker)
-
----
-
-⭐ If you find this project useful, consider giving the repository a star!
+A collaborative effort to make personal finance management clearer, more organized, and easier to understand.
