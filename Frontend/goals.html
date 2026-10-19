@@ -1,0 +1,48 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Saving goals | Pennywise</title><link rel="stylesheet" href="style.css"></head><body>
+<div class="app"><aside class="side" id="side"></aside><div class="content">
+<main>
+<h1>Saving goals</h1><p class="sub">Pick a target, add money when you save, and watch it grow.</p>
+<section class="stats">
+<div class="stat"><small>Total saved</small><strong id="tSaved">$0</strong></div>
+<div class="stat alt"><small>Total target</small><strong id="tTarget">$0</strong></div>
+<div class="stat soft"><small>Goals completed</small><strong id="tDone">0</strong></div>
+</section>
+<div class="layout">
+<section><div class="goals" id="list"></div></section>
+<form class="card" id="goalForm"><h2>New goal</h2>
+<label for="gname">Goal name</label><input id="gname" required placeholder="Emergency fund">
+<label for="gtarget">Target amount</label><input id="gtarget" type="number" min="1" step="0.01" required placeholder="2000">
+<label for="gdate">Target date</label><input id="gdate" type="date">
+<button class="btn">Create goal</button></form>
+</div></main></div></div>
+<script src="app.js"></script>
+<script>renderNav("goals")</script>
+<script>
+let goals=load("pw_goals");
+const $=id=>document.getElementById(id);
+function render(){
+  $("tSaved").textContent=money(goals.reduce((a,g)=>a+g.saved,0));
+  $("tTarget").textContent=money(goals.reduce((a,g)=>a+g.target,0));
+  $("tDone").textContent=goals.filter(g=>g.saved>=g.target).length;
+  $("list").innerHTML=goals.length?goals.map(g=>{
+    const p=Math.min(100,g.saved/g.target*100), ok=g.saved>=g.target;
+    return `<div class="card"><div class="row"><strong>${esc(g.name)}</strong>
+    <span class="${ok?"done":""}">${ok?"Completed":Math.round(p)+"%"}</span></div>
+    <div class="meta">${money(g.saved)} of ${money(g.target)}${g.date?" · by "+g.date:""}</div>
+    <div class="bar"><i class="goal" style="width:${p}%"></i></div>
+    <div class="row" style="margin-top:14px">
+    <input id="a${g.id}" type="number" min="0.01" step="0.01" placeholder="Amount" style="width:90px" aria-label="Amount to add to ${esc(g.name)}">
+    <button class="btn small" onclick="add(${g.id})">Add savings</button>
+    <button class="btn small ghost" onclick="del(${g.id})">Delete</button></div></div>`}).join("")
+    :'<p class="empty">No goals yet. Create one to start saving.</p>';
+}
+function add(id){const v=+$("a"+id).value;if(!v)return;
+  goals.find(g=>g.id===id).saved+=v;save("pw_goals",goals);render()}
+function del(id){goals=goals.filter(g=>g.id!==id);save("pw_goals",goals);render()}
+$("goalForm").onsubmit=e=>{e.preventDefault();
+  goals.push({id:uid(),name:$("gname").value.trim(),target:+$("gtarget").value,date:$("gdate").value,saved:0});
+  save("pw_goals",goals);e.target.reset();render()};
+render();
+</script></body></html>

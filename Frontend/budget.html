@@ -1,0 +1,51 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Budget | Pennywise</title><link rel="stylesheet" href="style.css"></head><body>
+<div class="app"><aside class="side" id="side"></aside><div class="content">
+<main>
+<h1>Monthly budget</h1><p class="sub">Set a limit for each category and track what you spend.</p>
+<section class="stats">
+<div class="stat"><small>Total budget</small><strong id="tBudget">$0</strong></div>
+<div class="stat alt"><small>Spent</small><strong id="tSpent">$0</strong></div>
+<div class="stat soft"><small>Remaining</small><strong id="tLeft">$0</strong></div>
+</section>
+<div class="layout">
+<section class="card"><h2>Categories</h2><div id="list"></div></section>
+<aside>
+<form class="card" id="catForm"><h2>New category</h2>
+<label for="cname">Category name</label><input id="cname" required placeholder="Groceries">
+<label for="climit">Monthly limit</label><input id="climit" type="number" min="1" step="0.01" required placeholder="400">
+<button class="btn">Add category</button></form>
+<form class="card" id="spendForm" style="margin-top:16px"><h2>Add expense</h2>
+<label for="scat">Category</label><select id="scat" required></select>
+<label for="samt">Amount</label><input id="samt" type="number" min="0.01" step="0.01" required placeholder="25">
+<button class="btn">Add expense</button></form>
+</aside></div></main></div></div>
+<script src="app.js"></script>
+<script>renderNav("budgets")</script>
+<script>
+let cats=[];
+const $=id=>document.getElementById(id);
+const fail=e=>alert("Could not reach the server. Is the API running?\n"+e.message);
+async function loadAll(){try{cats=await api("/budgets");render()}catch(e){fail(e)}}
+function render(){
+  const tb=cats.reduce((a,c)=>a+c.limit,0), ts=cats.reduce((a,c)=>a+c.spent,0);
+  $("tBudget").textContent=money(tb);$("tSpent").textContent=money(ts);$("tLeft").textContent=money(tb-ts);
+  $("scat").innerHTML=cats.map(c=>`<option value="${c.id}">${esc(c.name)}</option>`).join("");
+  $("list").innerHTML=cats.length?cats.map(c=>{
+    const p=Math.min(100,c.spent/c.limit*100), cls=c.spent>c.limit?"over":p>=80?"warn":"";
+    return `<div class="item"><div class="row"><strong>${esc(c.name)}</strong>
+    <button class="btn small ghost" onclick="del(${c.id})">Delete</button></div>
+    <div class="meta">${money(c.spent)} of ${money(c.limit)} ${c.spent>c.limit?"· over budget by "+money(c.spent-c.limit):"· "+money(c.limit-c.spent)+" left"}</div>
+    <div class="bar"><i class="${cls}" style="width:${p}%"></i></div></div>`}).join("")
+    :'<p class="empty">No categories yet. Add your first one to start tracking.</p>';
+}
+async function del(id){try{await api("/budgets/"+id,"DELETE");loadAll()}catch(e){fail(e)}}
+$("catForm").onsubmit=async e=>{e.preventDefault();
+  try{await api("/budgets","POST",{name:$("cname").value.trim(),limit:+$("climit").value});
+  e.target.reset();loadAll()}catch(err){fail(err)}};
+$("spendForm").onsubmit=async e=>{e.preventDefault();
+  try{await api(`/budgets/${$("scat").value}/expenses`,"POST",{amount:+$("samt").value});
+  $("samt").value="";loadAll()}catch(err){fail(err)}};
+loadAll();
+</script></body></html>

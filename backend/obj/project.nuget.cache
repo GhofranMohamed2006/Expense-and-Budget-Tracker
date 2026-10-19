@@ -1,0 +1,36 @@
+{
+  "version": 2,
+  "dgSpecHash": "hE9jmVIv0Qc=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\DELL\\Desktop\\pennywise\\backend\\PennywiseApi.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\DELL\\.nuget\\packages\\microsoft.aspnetcore.openapi\\10.0.0\\microsoft.aspnetcore.openapi.10.0.0.nupkg.sha512",
+    "C:\\Users\\DELL\\.nuget\\packages\\microsoft.data.sqlite.core\\10.0.13\\microsoft.data.sqlite.core.10.0.13.nupkg.sha512",
+    "C:\\Users\\DELL\\.nuget\\packages\\microsoft.entityframeworkcore\\10.0.13\\microsoft.entityframeworkcore.10.0.13.nupkg.sha512",
+    "C:\\Users\\DELL\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\10.0.13\\microsoft.entityframeworkcore.abstractions.10.0.13.nupkg.sha512",
+    "C:\\Users\\DELL\\.nuget\\packages\\microsoft.entityframeworkcore.analyzers\\10.0.13\\microsoft.entityframeworkcore.analyzers.10.0.13.nupkg.sha512",
+    "C:\\Users\\DELL\\.nuget\\packages\\microsoft.entityframeworkcore.relational\\10.0.13\\microsoft.entityframeworkcore.relational.10.0.13.nupkg.sha512",
+    "C:\\Users\\DELL\\.nuget\\packages\\microsoft.entityframeworkcore.sqlite\\10.0.13\\microsoft.entityframeworkcore.sqlite.10.0.13.nupkg.sha512",
+    "C:\\Users\\DELL\\.nuget\\packages\\microsoft.entityframeworkcore.sqlite.core\\10.0.13\\microsoft.entityframeworkcore.sqlite.core.10.0.13.nupkg.sha512",
+    "C:\\Users\\DELL\\.nuget\\packages\\microsoft.extensions.dependencymodel\\10.0.13\\microsoft.extensions.dependencymodel.10.0.13.nupkg.sha512",
+    "C:\\Users\\DELL\\.nuget\\packages\\microsoft.openapi\\2.0.0\\microsoft.openapi.2.0.0.nupkg.sha512",
+    "C:\\Users\\DELL\\.nuget\\packages\\sqlitepclraw.bundle_e_sqlite3\\2.1.13\\sqlitepclraw.bundle_e_sqlite3.2.1.13.nupkg.sha512",
+    "C:\\Users\\DELL\\.nuget\\packages\\sqlitepclraw.core\\2.1.13\\sqlitepclraw.core.2.1.13.nupkg.sha512",
+    "C:\\Users\\DELL\\.nuget\\packages\\sqlitepclraw.lib.e_sqlite3\\2.1.13\\sqlitepclraw.lib.e_sqlite3.2.1.13.nupkg.sha512",
+    "C:\\Users\\DELL\\.nuget\\packages\\sqlitepclraw.provider.e_sqlite3\\2.1.13\\sqlitepclraw.provider.e_sqlite3.2.1.13.nupkg.sha512"
+  ],
+  "logs": [
+    {
+      "code": "NU1903",
+      "level": "Warning",
+      "message": "Package 'Microsoft.OpenApi' 2.0.0 has a known high severity vulnerability, https://github.com/advisories/GHSA-v5pm-xwqc-g5wc",
+      "projectPath": "C:\\Users\\DELL\\Desktop\\pennywise\\backend\\PennywiseApi.csproj",
+      "warningLevel": 1,
+      "filePath": "C:\\Users\\DELL\\Desktop\\pennywise\\backend\\PennywiseApi.csproj",
+      "libraryId": "Microsoft.OpenApi",
+      "targetGraphs": [
+        "net10.0"
+      ]
+    }
+  ]
+}
