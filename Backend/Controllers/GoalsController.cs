@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using PennywiseApi.Data;
+using Pennywise.Api.Data;
 using PennywiseApi.Models;
 
 namespace PennywiseApi.Controllers;
