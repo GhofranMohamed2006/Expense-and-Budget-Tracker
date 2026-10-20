@@ -14,8 +14,6 @@ public class CategoriesController(AppDbContext db) : ControllerBase
 {
     private int UserId => int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
 
-    private static CategoryType ParseType(string s) => Enum.Parse<CategoryType>(s, ignoreCase: true);
-
     private static CategoryDto ToDto(Category c, int count) =>
         new(c.Id, c.Name, c.Type.ToString().ToLowerInvariant(), c.Icon, c.ColorIndex, count);
 
@@ -40,7 +38,8 @@ public class CategoriesController(AppDbContext db) : ControllerBase
     [HttpPost]
     public async Task<ActionResult<CategoryDto>> Create(CategoryRequest req)
     {
-        var type = ParseType(req.Type);
+        if (!Enum.TryParse<CategoryType>(req.Type, true, out var type))
+            return BadRequest(new { title = "Type must be expense or income." });
         var name = req.Name.Trim();
         if (await Exists(name, type, null))
             return Problem(title: "A category with this name already exists.", statusCode: 409);
@@ -57,16 +56,22 @@ public class CategoriesController(AppDbContext db) : ControllerBase
         var cat = await db.Categories.FirstOrDefaultAsync(c => c.Id == id && c.UserId == UserId);
         if (cat is null) return NotFound();
 
-        var type = ParseType(req.Type);
+        if (!Enum.TryParse<CategoryType>(req.Type, true, out var type))
+            return BadRequest(new { title = "Type must be expense or income." });
         var name = req.Name.Trim();
         if (await Exists(name, type, id))
             return Problem(title: "A category with this name already exists.", statusCode: 409);
 
-        var count = await db.Transactions.CountAsync(t => t.CategoryId == id);
+        var count = await db.Transactions.CountAsync(t => t.CategoryId == id && t.UserId == UserId);
         if (type != cat.Type && count > 0)
             return Problem(title: "Cannot change the type of a category that has transactions.", statusCode: 409);
 
         cat.Name = name; cat.Type = type; cat.Icon = req.Icon; cat.ColorIndex = req.ColorIndex;
+        var budgets = await db.BudgetCategories
+            .Where(b => b.CategoryId == id && b.UserId == UserId)
+            .ToListAsync();
+        foreach (var budget in budgets)
+            budget.Name = name;
         await db.SaveChangesAsync();
         return Ok(ToDto(cat, count));
     }
@@ -77,9 +82,13 @@ public class CategoriesController(AppDbContext db) : ControllerBase
         var cat = await db.Categories.FirstOrDefaultAsync(c => c.Id == id && c.UserId == UserId);
         if (cat is null) return NotFound();
 
-        var count = await db.Transactions.CountAsync(t => t.CategoryId == id);
+        var count = await db.Transactions.CountAsync(t => t.CategoryId == id && t.UserId == UserId);
+        var budgetCount = await db.BudgetCategories.CountAsync(
+            b => b.CategoryId == id && b.UserId == UserId);
         if (count > 0)
             return Problem(title: $"This category has {count} transactions. Move or delete them first.", statusCode: 409);
+        if (budgetCount > 0)
+            return Problem(title: "Delete the category budget before deleting this category.", statusCode: 409);
 
         db.Categories.Remove(cat);
         await db.SaveChangesAsync();
@@ -88,5 +97,5 @@ public class CategoriesController(AppDbContext db) : ControllerBase
 
     private Task<bool> Exists(string name, CategoryType type, int? exceptId) =>
         db.Categories.AnyAsync(c => c.UserId == UserId && c.Type == type
-            && c.Name.ToLower() == name.ToLower() && c.Id != exceptId);
+            && EF.Functions.Collate(c.Name, "NOCASE") == name && c.Id != exceptId);
 }

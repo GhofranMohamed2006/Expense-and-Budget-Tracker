@@ -16,13 +16,19 @@ const AuthClient = {
           'Content-Type': 'application/json',
           'Accept': 'application/json'
         },
-        body: JSON.stringify(data)
+        body: JSON.stringify({
+          fullName: data.name,
+          email: data.email,
+          password: data.password
+        })
       });
 
-      const json = await response.json().catch(() => ({
-        success: false,
-        message: 'Invalid response from server.'
-      }));
+      const result = await response.json().catch(() => ({}));
+      const json = {
+        ...result,
+        success: response.ok,
+        message: result.title || result.message || ''
+      };
 
       return {
         status: response.status,
@@ -57,10 +63,17 @@ const AuthClient = {
         body: JSON.stringify(data)
       });
 
-      const json = await response.json().catch(() => ({
-        success: false,
-        message: 'Invalid response from server.'
-      }));
+      const result = await response.json().catch(() => ({}));
+      const json = {
+        ...result,
+        success: response.ok,
+        message: result.title || result.message || '',
+        user: result.profile ? { ...result.profile, name: result.profile.fullName } : null,
+        redirectUrl: AppConfig.dashboardUrl
+      };
+      if (response.ok && result.token) {
+        localStorage.setItem('pw_token', result.token);
+      }
 
       return {
         status: response.status,
@@ -84,7 +97,7 @@ const AuthClient = {
    */
   async checkHealth() {
     try {
-      const response = await fetch(`${AppConfig.apiBaseUrl}/health`, { method: 'GET' });
+      const response = await fetch('/health', { method: 'GET' });
       return response.ok;
     } catch {
       return false;

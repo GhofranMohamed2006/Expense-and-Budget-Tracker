@@ -3,20 +3,9 @@
  */
 
 const AppConfig = (() => {
-  // Determine API base URL dynamically
-  const isSameOriginBackend = window.location.protocol.startsWith('http') && 
-    (window.location.port === '5005' || window.location.pathname.startsWith('/api'));
-
-  const apiBase = isSameOriginBackend 
-    ? '/api/auth' 
-    : 'http://localhost:5005/api/auth';
-
-  // Configurable Dashboard URL (Integration Placeholder)
-  const dashboardUrl = 'dashboard.html';
-
   return {
-    apiBaseUrl: apiBase,
-    dashboardUrl: dashboardUrl,
+    apiBaseUrl: '/api/auth',
+    dashboardUrl: '/app.html',
     appName: 'Pennywise'
   };
 })();

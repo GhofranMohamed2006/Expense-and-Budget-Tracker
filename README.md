@@ -8,6 +8,46 @@ The project is developed collaboratively, with separate modules integrated into 
 
 **Repository:** [Expense-and-Budget-Tracker](https://github.com/GhofranMohamed2006/Expense-and-Budget-Tracker)
 
+## Unified local application
+
+The supported integrated application is the ASP.NET Core 8 project at
+`Backend/Pennywise.Api.csproj`. It serves the landing/authentication pages and the
+authenticated app from the same origin, uses SQLite and EF Core migrations, and
+exposes account-scoped APIs. The other project folders are retained legacy or
+prototype implementations; they are not separate services required to run Pennywise.
+
+From the repository root in PowerShell, provision a development-only JWT key once:
+
+```powershell
+$rng = [System.Security.Cryptography.RandomNumberGenerator]::Create()
+$bytes = [byte[]]::new(64)
+$rng.GetBytes($bytes)
+$key = [Convert]::ToBase64String($bytes)
+dotnet user-secrets set "Jwt:Key" $key --project Backend\Pennywise.Api.csproj
+$rng.Dispose()
+Remove-Variable key,bytes,rng
+```
+
+Then run:
+
+```powershell
+dotnet restore Backend\Pennywise.Api.csproj
+dotnet run --project Backend\Pennywise.Api.csproj --launch-profile http
+```
+
+Open `http://localhost:5248/`. The landing page links to `/login` and `/register`;
+the authenticated application is available at `/app.html`. Swagger is available
+at `/swagger` in Development. The SQLite database is `Backend/pennywise.db`.
+The startup migration is additive: it preserves the old unowned `BudgetCategories`
+and `Goals` tables and stores new user-owned records in `UserBudgets` and `UserGoals`.
+Legacy budget/goal records have no account ownership and are intentionally not exposed
+to any signed-in user.
+
+For production, provide `Jwt__Key` through a secret manager or environment variable
+(at least 32 bytes); never commit it. Use HTTPS and a protected persistent SQLite
+location or a production database. The local development server intentionally needs
+no CORS policy because the frontend and API share one origin.
+
 ---
 
 ## 📑 Table of Contents
@@ -228,7 +268,8 @@ Only settings supported by the integrated implementation should be considered av
 | GitHub | Repository hosting and collaboration |
 | Visual Studio / Visual Studio Code | Development environment |
 
-**Architecture note:** The team should confirm and document the final backend hosting approach during integration. The main application and the separate authentication module may use different server implementations until their integration is completed.
+**Architecture note:** The supported entry point is `Backend/Pennywise.Api.csproj`.
+The other checked-in projects are historical prototypes and are not required at runtime.
 
 ---
 
@@ -294,50 +335,27 @@ SQLite Database
 
 ## 📂 Project Structure
 
-The following is a proposed logical structure for the complete project. Adapt the paths to the actual repository as the team integrates its modules.
+The repository currently contains the following primary runtime structure:
 
 ```text
 Expense-and-Budget-Tracker/
-│
-├── README.md
-├── .gitignore
-│
-├── docs/
-│   ├── project-structure.md
-│   ├── api-contracts.md
-│   └── testing-checklist.md
-│
 ├── Frontend/
-│   ├── index.html
-│   ├── login.html
-│   ├── register.html
-│   ├── dashboard.html
-│   ├── assets/
-│   ├── css/
-│   └── js/
-│
 ├── Backend/
 │   ├── Controllers/
-│   ├── Routes/
-│   ├── Interfaces/
+│   ├── Data/AppDbContext.cs
+│   ├── Migrations/
 │   ├── Models/
-│   ├── Repositories/
-│   ├── Services/
-│   ├── Security/
-│   ├── Utils/
+│   ├── Model/
 │   ├── Program.cs
-│   └── Backend.csproj
-│
-├── Database/
-│   ├── schema.sql
-│   └── migrations/
-│
-└── tests/
-    ├── api/
-    └── manual-test-cases.md
+│   └── Pennywise.Api.csproj
+└── Login & Register/Frontend/
+    ├── login.html
+    ├── register.html
+    └── css/, js/, assets/
 ```
 
-**Important:** This tree is a reference for the integrated application, not a claim that every directory or file already exists. Preserve existing working files and agree on shared paths before merging team branches.
+The backend serves `Frontend/` and the legacy authentication page assets directly;
+the standalone authentication server is not needed.
 
 ---
 
@@ -366,7 +384,11 @@ The database should support the main application entities.
 - Related records should remain consistent when edited or deleted.
 - Monetary calculations should use a consistent numeric representation.
 
-The actual database schema must be documented once the final schema and migrations are confirmed.
+The additive `InitialUnifiedSchema` migration creates the account-owned tables and
+indexes without dropping or rewriting the old, unowned budget and goal tables. New
+transactions have user and category foreign keys, including a composite category/user
+relationship. Old data without an owner is kept in place and requires an explicit
+owner mapping before it can safely be imported.
 
 ---
 
@@ -374,7 +396,8 @@ The actual database schema must be documented once the final schema and migratio
 
 ### Prerequisites
 
-Install the tools required by the final project configuration:
+Install the .NET 8 SDK and a modern browser. Run the integrated application from the
+repository root:
 
 - [.NET SDK](https://dotnet.microsoft.com/download)
 - [Git](https://git-scm.com/downloads)
@@ -388,78 +411,12 @@ dotnet --version
 git --version
 ```
 
-### 1. Clone the Repository
+1. Set the development JWT key once with the PowerShell command above.
+2. Run `dotnet restore Backend\Pennywise.Api.csproj`.
+3. Run `dotnet run --project Backend\Pennywise.Api.csproj --launch-profile http`.
+4. Open `http://localhost:5248/`.
 
-```bash
-git clone https://github.com/GhofranMohamed2006/Expense-and-Budget-Tracker.git
-cd Expense-and-Budget-Tracker
-```
-
-### 2. Fetch the Latest Branches
-
-```bash
-git fetch origin
-git branch -a
-```
-
-Switch to the branch agreed upon by the team. For example, to inspect the login and registration branch:
-
-```bash
-git switch --track origin/login--register
-```
-
-If that branch already exists locally:
-
-```bash
-git switch login--register
-```
-
-Use the integration branch selected by the team when running the complete application.
-
-### 3. Locate the Backend Project
-
-Find the actual `.csproj` file before restoring dependencies.
-
-For example, if the project file is located in `Backend`:
-
-```bash
-cd Backend
-dotnet restore
-```
-
-If the project uses a solution file, restore from the directory containing that solution instead:
-
-```bash
-dotnet restore YourSolution.sln
-```
-
-Replace the example solution name with the actual file name.
-
-### 4. Configure the Application
-
-Review the backend configuration and set the required database path, server port, API settings, and authentication configuration.
-
-Do not commit secrets or production credentials.
-
-### 5. Run the Backend
-
-From the directory containing the backend project:
-
-```bash
-dotnet run
-```
-
-Follow the terminal output to identify the configured local address and port.
-
-### 6. Start the Frontend
-
-Use the frontend serving method specified by the integrated application.
-
-If the backend serves the frontend files itself, start the backend and open its local address in your browser.
-
-If the frontend is served separately, configure its API base URL to match the backend address and port.
-
-### 7. Verify the Application
+Verify that:
 
 After startup, verify that:
 
@@ -471,28 +428,18 @@ After startup, verify that:
 - Errors are displayed clearly.
 - The browser console and backend logs do not show unexpected errors.
 
-Exact startup commands may change when the team finalizes the integrated solution structure.
-
 ---
 
 ## 🔧 Configuration
 
-Configuration depends on the selected backend and authentication implementation.
+| Setting | Source | Purpose |
+|---|---|---|
+| `ConnectionStrings:Default` | `Backend/appsettings.json` or `ConnectionStrings__Default` | SQLite connection; relative paths resolve from the backend content root |
+| `Jwt:Issuer`, `Jwt:Audience`, `Jwt:ExpiresMinutes` | `Backend/appsettings.json` | JWT validation and expiration settings |
+| `Jwt:Key` | .NET user-secrets for development; secret manager or `Jwt__Key` environment variable for deployment | Signing key of at least 32 bytes; never checked in |
+| `ASPNETCORE_URLS` | Optional environment variable | Override the local listener |
 
-Potential configuration values include:
-
-| Setting | Purpose |
-|---|---|
-| `PORT` | Server listening port, if supported |
-| `SQLITE_PATH` | Database file location, if supported |
-| `APP_BASE_URL` | Public or local application URL |
-| `GOOGLE_CLIENT_ID` | Google authentication configuration, if implemented |
-| `GOOGLE_CLIENT_SECRET` | Server-side OAuth configuration, if required |
-| SMTP settings | Email delivery for recovery flows, if implemented |
-
-Use environment variables or local configuration for sensitive values. Do not place real credentials in this README.
-
-Provide an example configuration file with placeholder values if the team needs one.
+No separate frontend origin or CORS configuration is required.
 
 ---
 

@@ -240,13 +240,13 @@
         <p>Welcome to Pennywise, your personal finance and expense-tracking application. By creating an account, you agree to comply with and be bound by the following terms.</p>
         
         <h4>1. Account Security &amp; Credentials</h4>
-        <p>You are responsible for maintaining the confidentiality of your password and credentials. Pennywise stores passwords using industry-standard salted PBKDF2 cryptography and does not store plaintext passwords.</p>
+        <p>You are responsible for maintaining the confidentiality of your password and credentials. Pennywise stores passwords as salted BCrypt hashes and does not store plaintext passwords.</p>
         
         <h4>2. Financial Data Privacy</h4>
         <p>Your financial records, expense logs, and budget targets belong solely to you. We do not sell or monetize personal financial transaction data.</p>
         
-        <h4>3. Standalone Authentication Architecture</h4>
-        <p>This module provides isolated authentication services. Connecting to shared databases or external dashboard systems is managed according to team integration guidelines.</p>
+        <h4>3. Account Data</h4>
+        <p>Transactions, categories, budgets, savings goals, and preferences are stored for the signed-in account. Keep your sign-in details private and sign out on shared devices.</p>
       </div>
       <div class="modal-footer">
         <button type="button" id="cancel-terms-btn" class="btn-secondary">Close</button>

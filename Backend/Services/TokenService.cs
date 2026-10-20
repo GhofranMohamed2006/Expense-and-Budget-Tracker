@@ -17,7 +17,8 @@ public class TokenService(IConfiguration cfg)
             claims: new[]
             {
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-                new Claim(ClaimTypes.Email, user.Email)
+                new Claim(ClaimTypes.Email, user.Email),
+                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString("N"))
             },
             expires: DateTime.UtcNow.AddMinutes(cfg.GetValue("Jwt:ExpiresMinutes", 120)),
             signingCredentials: new SigningCredentials(key, SecurityAlgorithms.HmacSha256));
@@ -27,13 +28,15 @@ public class TokenService(IConfiguration cfg)
 
 public static class PasswordRules
 {
-    public const string Message = "Password must be at least 8 characters and include at least 3 of: lowercase, uppercase, number, symbol.";
+    public const string Message = "Password must be at least 8 characters and include lowercase, uppercase, a number, and a symbol.";
 
     public static bool IsStrong(string p)
     {
         if (p.Length < 8) return false;
-        var kinds = new[] { p.Any(char.IsLower), p.Any(char.IsUpper), p.Any(char.IsDigit), p.Any(c => !char.IsLetterOrDigit(c)) };
-        return kinds.Count(k => k) >= 3;
+        return p.Any(char.IsLower)
+            && p.Any(char.IsUpper)
+            && p.Any(char.IsDigit)
+            && p.Any(c => !char.IsLetterOrDigit(c));
     }
 }
 

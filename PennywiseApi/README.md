@@ -1,4 +1,8 @@
-# Pennywise API
+# Legacy transaction API prototype
+
+> This project is retained for reference and is not part of the unified application.
+> Use `Backend/Pennywise.Api.csproj` from the repository root to run Pennywise. This
+> prototype contains sample transactions and has no authentication or user isolation.
 
 ASP.NET Core 8 Web API and SQLite backend for the Pennywise Transactions page.
 

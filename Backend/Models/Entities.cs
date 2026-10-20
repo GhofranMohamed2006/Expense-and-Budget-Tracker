@@ -1,3 +1,5 @@
+using PennywiseApi.Models;
+
 namespace Pennywise.Api.Models;
 
 public class User
@@ -11,6 +13,8 @@ public class User
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     public UserPreferences Preferences { get; set; } = new();
     public List<Category> Categories { get; set; } = new();
+    public List<BudgetCategory> Budgets { get; set; } = new();
+    public List<Goal> Goals { get; set; } = new();
 }
 
 public class UserPreferences
@@ -37,9 +41,9 @@ public class Category
     public string Icon { get; set; } = "tags";
     public int ColorIndex { get; set; }
     public List<Transaction> Transactions { get; set; } = new();
+    public List<BudgetCategory> Budgets { get; set; } = new();
 }
 
-// Minimal transaction entity so each category can report its transaction count.
 public class Transaction
 {
     public int Id { get; set; }
@@ -48,4 +52,11 @@ public class Transaction
     public decimal Amount { get; set; }
     public DateTime Date { get; set; } = DateTime.UtcNow;
     public string? Note { get; set; }
+}
+
+public class RevokedToken
+{
+    public int Id { get; set; }
+    public string TokenId { get; set; } = "";
+    public DateTime ExpiresAt { get; set; }
 }

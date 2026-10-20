@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Pennywise | Your finances</title>
+  <link rel="stylesheet" href="app.css">
+</head>
+<body>
+  <div class="shell">
+    <aside class="sidebar">
+      <a class="brand" href="#dashboard"><span class="brand-mark">P</span>Pennywise</a>
+      <nav id="nav" aria-label="Main navigation"></nav>
+      <button class="nav-link logout" id="logout" type="button">Log out</button>
+    </aside>
+    <main class="main">
+      <header class="topbar">
+        <div><p class="eyebrow">PERSONAL FINANCE</p><h1 id="page-title">Dashboard</h1></div>
+        <div class="identity"><span class="avatar" id="avatar">P</span><span id="user-name">Account</span></div>
+      </header>
+      <div id="message" role="status" aria-live="polite"></div>
+      <section id="content" aria-live="polite"></section>
+    </main>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
