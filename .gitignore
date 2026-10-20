@@ -2,3 +2,7 @@
 **/.vs/
 **/bin/
 **/obj/
+
+**/bin/
+**/obj/
+backend/pennywise.db
