@@ -1,0 +1,209 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" fill="none">
+  <defs>
+    <!-- Background Circle Gradient -->
+    <radialGradient id="mintCircleGrad" cx="50%" cy="50%" r="50%" fx="35%" fy="35%">
+      <stop offset="0%" stop-color="#DCFCE7"/>
+      <stop offset="65%" stop-color="#C7F5DE"/>
+      <stop offset="100%" stop-color="#A7EED0"/>
+    </radialGradient>
+    
+    <!-- Outer Soft Glow -->
+    <radialGradient id="outerGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="70%" stop-color="#E8F8F0" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#E8F8F0" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Wallet Leather Gradients -->
+    <linearGradient id="walletBodyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8F98F7"/>
+      <stop offset="50%" stop-color="#707BEA"/>
+      <stop offset="100%" stop-color="#5662D8"/>
+    </linearGradient>
+
+    <linearGradient id="walletInnerGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#6572E6"/>
+      <stop offset="100%" stop-color="#4B56C7"/>
+    </linearGradient>
+
+    <linearGradient id="walletFlapGrad" x1="0%" y1="0%" x2="100%" y2="60%">
+      <stop offset="0%" stop-color="#9CA5F9"/>
+      <stop offset="100%" stop-color="#6B77E8"/>
+    </linearGradient>
+
+    <!-- Clasp Gradient -->
+    <linearGradient id="claspGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FDE68A"/>
+      <stop offset="45%" stop-color="#F59E0B"/>
+      <stop offset="100%" stop-color="#D97706"/>
+    </linearGradient>
+
+    <!-- Gold Coin Gradients -->
+    <linearGradient id="coinGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FEF08A"/>
+      <stop offset="35%" stop-color="#FBBF24"/>
+      <stop offset="85%" stop-color="#F59E0B"/>
+      <stop offset="100%" stop-color="#D97706"/>
+    </linearGradient>
+
+    <linearGradient id="coinGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFBEB"/>
+      <stop offset="50%" stop-color="#FCD34D"/>
+      <stop offset="100%" stop-color="#B45309"/>
+    </linearGradient>
+
+    <!-- Leaf Gradients -->
+    <linearGradient id="leafGradDark" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#14532D"/>
+      <stop offset="50%" stop-color="#166534"/>
+      <stop offset="100%" stop-color="#15803D"/>
+    </linearGradient>
+
+    <linearGradient id="leafGradBright" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#15803D"/>
+      <stop offset="60%" stop-color="#22C55E"/>
+      <stop offset="100%" stop-color="#86EFAC"/>
+    </linearGradient>
+
+    <!-- Filters -->
+    <filter id="softShadow" x="-20%" y="-20%" width="150%" height="150%">
+      <feDropShadow dx="0" dy="18" stdDeviation="22" flood-color="#165E34" flood-opacity="0.14"/>
+    </filter>
+
+    <filter id="coinShadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="2" dy="8" stdDeviation="8" flood-color="#78350F" flood-opacity="0.25"/>
+    </filter>
+
+    <filter id="leafShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="2" dy="6" stdDeviation="6" flood-color="#052E16" flood-opacity="0.2"/>
+    </filter>
+  </defs>
+
+  <!-- 1. Ambient Background Layer -->
+  <circle cx="300" cy="300" r="280" fill="url(#outerGlow)"/>
+  
+  <!-- 2. Primary Mint Circular Background -->
+  <circle cx="300" cy="300" r="230" fill="url(#mintCircleGrad)" stroke="#A7F3D0" stroke-width="4"/>
+  <circle cx="300" cy="300" r="205" fill="none" stroke="#6EE7B7" stroke-width="2" stroke-dasharray="6 8" opacity="0.6"/>
+
+  <!-- 3. Background Botanical Leaves (Behind Wallet) -->
+  <g filter="url(#leafShadow)">
+    <!-- Top-Left Large Leaf -->
+    <path d="M210 170 C160 110, 90 140, 110 210 C125 260, 190 240, 225 215 C235 205, 230 190, 210 170 Z" fill="url(#leafGradDark)"/>
+    <path d="M125 190 Q170 190 220 210" stroke="#86EFAC" stroke-width="2.5" stroke-linecap="round" opacity="0.7"/>
+    <path d="M150 175 Q165 190 180 195" stroke="#86EFAC" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
+    <path d="M170 155 Q185 175 195 185" stroke="#86EFAC" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
+
+    <!-- Left Small Accent Leaf -->
+    <path d="M130 250 C80 235, 75 300, 120 325 C150 340, 175 305, 165 275 C160 260, 145 255, 130 250 Z" fill="url(#leafGradBright)"/>
+    <path d="M95 280 Q130 285 155 290" stroke="#DCFCE7" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
+
+    <!-- Top-Right Botanical Sprout -->
+    <path d="M390 140 C435 90, 495 130, 470 190 C450 235, 395 215, 375 180 C368 165, 375 152, 390 140 Z" fill="url(#leafGradDark)"/>
+    <path d="M410 180 Q445 160 460 150" stroke="#86EFAC" stroke-width="2.5" stroke-linecap="round" opacity="0.7"/>
+    <path d="M415 195 Q435 180 445 170" stroke="#86EFAC" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
+  </g>
+
+  <!-- 4. Background Coins Rising Out of Wallet -->
+  <g filter="url(#coinShadow)">
+    <!-- Top-Left Coin -->
+    <g transform="translate(180, 160) rotate(-18)">
+      <circle cx="36" cy="36" r="36" fill="url(#coinGrad1)"/>
+      <circle cx="36" cy="36" r="30" fill="none" stroke="#FDE68A" stroke-width="2.5" stroke-dasharray="2 3"/>
+      <circle cx="36" cy="36" r="26" fill="url(#coinGrad2)"/>
+      <text x="36" y="45" font-family="'Segoe UI', Roboto, sans-serif" font-size="28" font-weight="900" fill="#92400E" text-anchor="middle">$</text>
+    </g>
+
+    <!-- Top Center Big Coin -->
+    <g transform="translate(260, 110) rotate(8)">
+      <circle cx="45" cy="45" r="45" fill="url(#coinGrad1)"/>
+      <circle cx="45" cy="45" r="38" fill="none" stroke="#FEF08A" stroke-width="3" stroke-dasharray="3 3"/>
+      <circle cx="45" cy="45" r="33" fill="url(#coinGrad2)"/>
+      <text x="45" y="56" font-family="'Segoe UI', Roboto, sans-serif" font-size="36" font-weight="900" fill="#92400E" text-anchor="middle">$</text>
+    </g>
+
+    <!-- Top Right Coin -->
+    <g transform="translate(365, 150) rotate(22)">
+      <circle cx="32" cy="32" r="32" fill="url(#coinGrad1)"/>
+      <circle cx="32" cy="32" r="26" fill="none" stroke="#FDE68A" stroke-width="2" stroke-dasharray="2 2"/>
+      <circle cx="32" cy="32" r="22" fill="url(#coinGrad2)"/>
+      <text x="32" y="40" font-family="'Segoe UI', Roboto, sans-serif" font-size="24" font-weight="900" fill="#92400E" text-anchor="middle">$</text>
+    </g>
+  </g>
+
+  <!-- 5. Blue Wallet Body (Main Structure) -->
+  <g filter="url(#softShadow)">
+    <!-- Back Pocket/Card insert -->
+    <rect x="175" y="240" width="250" height="90" rx="16" fill="url(#walletInnerGrad)"/>
+    <!-- Folded Green Bill / Note in back pocket -->
+    <rect x="205" y="220" width="190" height="60" rx="8" fill="#22C55E" transform="rotate(-3 300 250)"/>
+    <rect x="215" y="228" width="170" height="44" rx="6" fill="#16A34A" transform="rotate(-3 300 250)"/>
+    <circle cx="300" cy="250" r="14" fill="#86EFAC" opacity="0.8"/>
+
+    <!-- Credit card peaking out -->
+    <rect x="230" y="235" width="140" height="70" rx="8" fill="#3B82F6" transform="rotate(6 300 270)"/>
+    <rect x="240" y="250" width="120" height="10" rx="3" fill="#1D4ED8" transform="rotate(6 300 270)"/>
+
+    <!-- Main Front Wallet Shell -->
+    <rect x="150" y="270" width="300" height="195" rx="28" fill="url(#walletBodyGrad)"/>
+    <!-- Decorative Stitching along border -->
+    <rect x="160" y="280" width="280" height="175" rx="20" fill="none" stroke="#A5B4FC" stroke-width="2" stroke-dasharray="6 5" opacity="0.7"/>
+
+    <!-- Subtle leather crease / highlight -->
+    <path d="M165 290 Q300 305 435 290" stroke="#C7D2FE" stroke-width="2.5" stroke-linecap="round" opacity="0.5"/>
+
+    <!-- Wallet Flap & Clasp -->
+    <path d="M150 300 H400 C430 300 450 325 450 355 C450 385 430 410 400 410 H150 V300 Z" fill="url(#walletFlapGrad)"/>
+    <!-- Flap Stitching -->
+    <path d="M160 312 H395 C418 312 438 330 438 355 C438 380 418 398 395 398 H160" fill="none" stroke="#C7D2FE" stroke-width="2" stroke-dasharray="5 5" opacity="0.8"/>
+
+    <!-- Gold Metallic Clasp Button -->
+    <circle cx="395" cy="355" r="22" fill="url(#claspGold)" filter="url(#coinShadow)"/>
+    <circle cx="395" cy="355" r="17" fill="none" stroke="#FFFBEB" stroke-width="2"/>
+    <circle cx="395" cy="355" r="8" fill="#78350F" opacity="0.3"/>
+  </g>
+
+  <!-- 6. Foreground Gold Coins (Resting & Floating) -->
+  <g filter="url(#coinShadow)">
+    <!-- Bottom Left Leaning Coin -->
+    <g transform="translate(130, 420) rotate(-14)">
+      <circle cx="38" cy="38" r="38" fill="url(#coinGrad1)"/>
+      <circle cx="38" cy="38" r="31" fill="none" stroke="#FEF08A" stroke-width="2.5" stroke-dasharray="2 3"/>
+      <circle cx="38" cy="38" r="27" fill="url(#coinGrad2)"/>
+      <text x="38" y="47" font-family="'Segoe UI', Roboto, sans-serif" font-size="28" font-weight="900" fill="#92400E" text-anchor="middle">$</text>
+    </g>
+
+    <!-- Bottom Right Stacking Coin -->
+    <g transform="translate(390, 435) rotate(12)">
+      <circle cx="36" cy="36" r="36" fill="url(#coinGrad1)"/>
+      <circle cx="36" cy="36" r="30" fill="none" stroke="#FEF08A" stroke-width="2.5" stroke-dasharray="2 3"/>
+      <circle cx="36" cy="36" r="25" fill="url(#coinGrad2)"/>
+      <text x="36" y="45" font-family="'Segoe UI', Roboto, sans-serif" font-size="26" font-weight="900" fill="#92400E" text-anchor="middle">$</text>
+    </g>
+  </g>
+
+  <!-- 7. Foreground Botanical Leaves & Sprouts -->
+  <g filter="url(#leafShadow)">
+    <!-- Bottom Left Sprouting Foliage -->
+    <path d="M190 440 C140 450, 110 500, 150 535 C190 570, 230 520, 220 470 C215 450, 205 442, 190 440 Z" fill="url(#leafGradBright)"/>
+    <path d="M140 505 Q175 490 205 465" stroke="#DCFCE7" stroke-width="2" stroke-linecap="round" opacity="0.8"/>
+
+    <!-- Bottom Right Graceful Leaf -->
+    <path d="M440 400 C490 410, 520 460, 485 500 C450 540, 400 500, 415 450 C420 430, 430 410, 440 400 Z" fill="url(#leafGradDark)"/>
+    <path d="M475 470 Q445 460 425 435" stroke="#86EFAC" stroke-width="2.5" stroke-linecap="round" opacity="0.7"/>
+
+    <!-- Mini Sprout at base -->
+    <path d="M290 465 C260 475, 265 505, 295 510 C320 515, 325 485, 305 470 C300 466, 295 464, 290 465 Z" fill="url(#leafGradBright)"/>
+  </g>
+
+  <!-- 8. Sparkles & Prosperity Highlights -->
+  <!-- Sparkle 1 Top Right -->
+  <path d="M470 230 Q470 245 485 245 Q470 245 470 260 Q470 245 455 245 Q470 245 470 230 Z" fill="#F59E0B"/>
+  <circle cx="470" cy="245" r="2.5" fill="#FFF"/>
+
+  <!-- Sparkle 2 Top Left -->
+  <path d="M150 145 Q150 156 161 156 Q150 156 150 167 Q150 156 139 156 Q150 156 150 145 Z" fill="#10B981"/>
+  <circle cx="150" cy="156" r="2" fill="#FFF"/>
+
+  <!-- Sparkle 3 Bottom Right -->
+  <path d="M490 350 Q490 360 500 360 Q490 360 490 370 Q490 360 480 360 Q490 360 490 350 Z" fill="#FBBF24"/>
+</svg>

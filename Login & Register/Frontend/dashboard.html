@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Placeholder — Pennywise</title>
+  <link rel="icon" type="image/svg+xml" href="assets/images/pennywise-logo.svg">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/auth.css">
+  <style>
+    .dashboard-placeholder-card {
+      max-width: 600px;
+      margin: 40px auto;
+      background: #FFFFFF;
+      border-radius: var(--radius-xl);
+      padding: 40px;
+      box-shadow: var(--shadow-card);
+      border: 1px solid #E2E8F0;
+    }
+    .badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: var(--radius-pill);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      background-color: #FEF3C7;
+      color: #92400E;
+      margin-bottom: 16px;
+    }
+    .user-info-box {
+      margin: 20px 0;
+      padding: 16px 20px;
+      border-radius: var(--radius-md);
+      background-color: #F8FAFC;
+      border: 1px solid #E2E8F0;
+    }
+    .user-info-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 6px 0;
+      font-size: 14px;
+    }
+    .user-info-label {
+      color: var(--color-text-secondary);
+      font-weight: 500;
+    }
+    .user-info-val {
+      color: var(--color-text-primary);
+      font-weight: 600;
+    }
+    .notice-box {
+      background-color: #EFF6FF;
+      border-left: 4px solid var(--color-accent-blue);
+      padding: 14px 16px;
+      border-radius: var(--radius-sm);
+      font-size: 13.5px;
+      color: #1E3A8A;
+      margin-bottom: 24px;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body class="auth-page">
+  <main class="dashboard-placeholder-card">
+    <div style="text-align: center; margin-bottom: 20px;">
+      <img src="assets/images/pennywise-logo.svg" alt="Pennywise" height="42">
+    </div>
+
+    <div style="text-align: center;">
+      <span class="badge">Integration Placeholder</span>
+      <h1 class="auth-title" style="margin-bottom: 8px;">Authentication Successful</h1>
+      <p class="auth-subtitle">Welcome to Pennywise! You have successfully signed in.</p>
+    </div>
+
+    <div class="user-info-box">
+      <div class="user-info-row">
+        <span class="user-info-label">Full Name:</span>
+        <span id="u-name" class="user-info-val">—</span>
+      </div>
+      <div class="user-info-row">
+        <span class="user-info-label">Email Address:</span>
+        <span id="u-email" class="user-info-val">—</span>
+      </div>
+      <div class="user-info-row">
+        <span class="user-info-label">Account ID:</span>
+        <span id="u-id" class="user-info-val">—</span>
+      </div>
+      <div class="user-info-row">
+        <span class="user-info-label">Auth Status:</span>
+        <span style="color: #16A34A; font-weight: 700;">Verified Active</span>
+      </div>
+    </div>
+
+    <div class="notice-box">
+      <strong>Team Integration Notice:</strong><br>
+      The primary Pennywise Dashboard belongs to another team member and is maintained in a separate repository. In a production environment, set the environment variable <code>PENNYWISE_DASHBOARD_URL</code> or configure <code>app.js</code> to point to the shared dashboard endpoint.
+    </div>
+
+    <button type="button" id="logout-btn" class="btn-primary" style="background-color: var(--color-primary);">
+      Sign Out &amp; Return to Login
+    </button>
+  </main>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const rawUser = sessionStorage.getItem('pennywise_auth_user');
+      if (rawUser) {
+        try {
+          const user = JSON.parse(rawUser);
+          document.getElementById('u-name').textContent = user.name || 'User';
+          document.getElementById('u-email').textContent = user.email || '—';
+          document.getElementById('u-id').textContent = '#' + (user.id || '1');
+        } catch {}
+      }
+
+      document.getElementById('logout-btn').addEventListener('click', () => {
+        sessionStorage.removeItem('pennywise_auth_user');
+        window.location.href = 'login.html';
+      });
+    });
+  </script>
+</body>
+</html>
