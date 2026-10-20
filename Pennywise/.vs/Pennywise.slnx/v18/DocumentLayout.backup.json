@@ -1,0 +1,217 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "G:\\my-files\\GhofGhof\\depi\\mini-project\\Pennywise\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{D793D0EA-B826-56BF-2AD4-193FB135A44A}|Pennywise.Backend\\Pennywise.Backend.csproj|g:\\my-files\\ghofghof\\depi\\mini-project\\pennywise\\pennywise.backend\\apiserver.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D793D0EA-B826-56BF-2AD4-193FB135A44A}|Pennywise.Backend\\Pennywise.Backend.csproj|solutionrelative:pennywise.backend\\apiserver.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D793D0EA-B826-56BF-2AD4-193FB135A44A}|Pennywise.Backend\\Pennywise.Backend.csproj|g:\\my-files\\ghofghof\\depi\\mini-project\\pennywise\\pennywise.backend\\dashboardservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D793D0EA-B826-56BF-2AD4-193FB135A44A}|Pennywise.Backend\\Pennywise.Backend.csproj|solutionrelative:pennywise.backend\\dashboardservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D793D0EA-B826-56BF-2AD4-193FB135A44A}|Pennywise.Backend\\Pennywise.Backend.csproj|g:\\my-files\\ghofghof\\depi\\mini-project\\pennywise\\pennywise.backend\\transaction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D793D0EA-B826-56BF-2AD4-193FB135A44A}|Pennywise.Backend\\Pennywise.Backend.csproj|solutionrelative:pennywise.backend\\transaction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D793D0EA-B826-56BF-2AD4-193FB135A44A}|Pennywise.Backend\\Pennywise.Backend.csproj|g:\\my-files\\ghofghof\\depi\\mini-project\\pennywise\\pennywise.backend\\budget.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D793D0EA-B826-56BF-2AD4-193FB135A44A}|Pennywise.Backend\\Pennywise.Backend.csproj|solutionrelative:pennywise.backend\\budget.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D793D0EA-B826-56BF-2AD4-193FB135A44A}|Pennywise.Backend\\Pennywise.Backend.csproj|g:\\my-files\\ghofghof\\depi\\mini-project\\pennywise\\pennywise.backend\\transactionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D793D0EA-B826-56BF-2AD4-193FB135A44A}|Pennywise.Backend\\Pennywise.Backend.csproj|solutionrelative:pennywise.backend\\transactionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D793D0EA-B826-56BF-2AD4-193FB135A44A}|Pennywise.Backend\\Pennywise.Backend.csproj|g:\\my-files\\ghofghof\\depi\\mini-project\\pennywise\\pennywise.backend\\budgetservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D793D0EA-B826-56BF-2AD4-193FB135A44A}|Pennywise.Backend\\Pennywise.Backend.csproj|solutionrelative:pennywise.backend\\budgetservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D793D0EA-B826-56BF-2AD4-193FB135A44A}|Pennywise.Backend\\Pennywise.Backend.csproj|g:\\my-files\\ghofghof\\depi\\mini-project\\pennywise\\pennywise.backend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D793D0EA-B826-56BF-2AD4-193FB135A44A}|Pennywise.Backend\\Pennywise.Backend.csproj|solutionrelative:pennywise.backend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D793D0EA-B826-56BF-2AD4-193FB135A44A}|Pennywise.Backend\\Pennywise.Backend.csproj|g:\\my-files\\ghofghof\\depi\\mini-project\\pennywise\\pennywise.backend\\budgetsummary.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D793D0EA-B826-56BF-2AD4-193FB135A44A}|Pennywise.Backend\\Pennywise.Backend.csproj|solutionrelative:pennywise.backend\\budgetsummary.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D793D0EA-B826-56BF-2AD4-193FB135A44A}|Pennywise.Backend\\Pennywise.Backend.csproj|g:\\my-files\\ghofghof\\depi\\mini-project\\pennywise\\pennywise.backend\\monthlyexpense.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D793D0EA-B826-56BF-2AD4-193FB135A44A}|Pennywise.Backend\\Pennywise.Backend.csproj|solutionrelative:pennywise.backend\\monthlyexpense.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D793D0EA-B826-56BF-2AD4-193FB135A44A}|Pennywise.Backend\\Pennywise.Backend.csproj|g:\\my-files\\ghofghof\\depi\\mini-project\\pennywise\\pennywise.backend\\categoryexpense.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D793D0EA-B826-56BF-2AD4-193FB135A44A}|Pennywise.Backend\\Pennywise.Backend.csproj|solutionrelative:pennywise.backend\\categoryexpense.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D793D0EA-B826-56BF-2AD4-193FB135A44A}|Pennywise.Backend\\Pennywise.Backend.csproj|g:\\my-files\\ghofghof\\depi\\mini-project\\pennywise\\pennywise.backend\\dashboardsummary.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D793D0EA-B826-56BF-2AD4-193FB135A44A}|Pennywise.Backend\\Pennywise.Backend.csproj|solutionrelative:pennywise.backend\\dashboardsummary.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D793D0EA-B826-56BF-2AD4-193FB135A44A}|Pennywise.Backend\\Pennywise.Backend.csproj|g:\\my-files\\ghofghof\\depi\\mini-project\\pennywise\\pennywise.backend\\database.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D793D0EA-B826-56BF-2AD4-193FB135A44A}|Pennywise.Backend\\Pennywise.Backend.csproj|solutionrelative:pennywise.backend\\database.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ApiServer.cs",
+              "DocumentMoniker": "G:\\my-files\\GhofGhof\\depi\\mini-project\\Pennywise\\Pennywise.Backend\\ApiServer.cs",
+              "RelativeDocumentMoniker": "Pennywise.Backend\\ApiServer.cs",
+              "ToolTip": "G:\\my-files\\GhofGhof\\depi\\mini-project\\Pennywise\\Pennywise.Backend\\ApiServer.cs",
+              "RelativeToolTip": "Pennywise.Backend\\ApiServer.cs",
+              "ViewState": "AgIAAN0BAAAAAAAAAAAwwOgBAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-18T12:14:22.788Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Transaction.cs",
+              "DocumentMoniker": "G:\\my-files\\GhofGhof\\depi\\mini-project\\Pennywise\\Pennywise.Backend\\Transaction.cs",
+              "RelativeDocumentMoniker": "Pennywise.Backend\\Transaction.cs",
+              "ToolTip": "G:\\my-files\\GhofGhof\\depi\\mini-project\\Pennywise\\Pennywise.Backend\\Transaction.cs",
+              "RelativeToolTip": "Pennywise.Backend\\Transaction.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-18T09:37:56.392Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "TransactionService.cs",
+              "DocumentMoniker": "G:\\my-files\\GhofGhof\\depi\\mini-project\\Pennywise\\Pennywise.Backend\\TransactionService.cs",
+              "RelativeDocumentMoniker": "Pennywise.Backend\\TransactionService.cs",
+              "ToolTip": "G:\\my-files\\GhofGhof\\depi\\mini-project\\Pennywise\\Pennywise.Backend\\TransactionService.cs",
+              "RelativeToolTip": "Pennywise.Backend\\TransactionService.cs",
+              "ViewState": "AgIAANYAAAAAAAAAAAAowOsAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-18T09:42:45.683Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "DashboardService.cs",
+              "DocumentMoniker": "G:\\my-files\\GhofGhof\\depi\\mini-project\\Pennywise\\Pennywise.Backend\\DashboardService.cs",
+              "RelativeDocumentMoniker": "Pennywise.Backend\\DashboardService.cs",
+              "ToolTip": "G:\\my-files\\GhofGhof\\depi\\mini-project\\Pennywise\\Pennywise.Backend\\DashboardService.cs",
+              "RelativeToolTip": "Pennywise.Backend\\DashboardService.cs",
+              "ViewState": "AgIAAGwAAAAAAAAAAAAswH4AAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-18T11:02:54.644Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Program.cs",
+              "DocumentMoniker": "G:\\my-files\\GhofGhof\\depi\\mini-project\\Pennywise\\Pennywise.Backend\\Program.cs",
+              "RelativeDocumentMoniker": "Pennywise.Backend\\Program.cs",
+              "ToolTip": "G:\\my-files\\GhofGhof\\depi\\mini-project\\Pennywise\\Pennywise.Backend\\Program.cs",
+              "RelativeToolTip": "Pennywise.Backend\\Program.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABcAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-17T21:46:21.563Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "BudgetService.cs",
+              "DocumentMoniker": "G:\\my-files\\GhofGhof\\depi\\mini-project\\Pennywise\\Pennywise.Backend\\BudgetService.cs",
+              "RelativeDocumentMoniker": "Pennywise.Backend\\BudgetService.cs",
+              "ToolTip": "G:\\my-files\\GhofGhof\\depi\\mini-project\\Pennywise\\Pennywise.Backend\\BudgetService.cs",
+              "RelativeToolTip": "Pennywise.Backend\\BudgetService.cs",
+              "ViewState": "AgIAALsAAAAAAAAAAAAswMMAAAA0AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-18T12:04:43.468Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "BudgetSummary.cs",
+              "DocumentMoniker": "G:\\my-files\\GhofGhof\\depi\\mini-project\\Pennywise\\Pennywise.Backend\\BudgetSummary.cs",
+              "RelativeDocumentMoniker": "Pennywise.Backend\\BudgetSummary.cs",
+              "ToolTip": "G:\\my-files\\GhofGhof\\depi\\mini-project\\Pennywise\\Pennywise.Backend\\BudgetSummary.cs",
+              "RelativeToolTip": "Pennywise.Backend\\BudgetSummary.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-18T12:03:22.836Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Budget.cs",
+              "DocumentMoniker": "G:\\my-files\\GhofGhof\\depi\\mini-project\\Pennywise\\Pennywise.Backend\\Budget.cs",
+              "RelativeDocumentMoniker": "Pennywise.Backend\\Budget.cs",
+              "ToolTip": "G:\\my-files\\GhofGhof\\depi\\mini-project\\Pennywise\\Pennywise.Backend\\Budget.cs",
+              "RelativeToolTip": "Pennywise.Backend\\Budget.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-18T12:01:42.25Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "MonthlyExpense.cs",
+              "DocumentMoniker": "G:\\my-files\\GhofGhof\\depi\\mini-project\\Pennywise\\Pennywise.Backend\\MonthlyExpense.cs",
+              "RelativeDocumentMoniker": "Pennywise.Backend\\MonthlyExpense.cs",
+              "ToolTip": "G:\\my-files\\GhofGhof\\depi\\mini-project\\Pennywise\\Pennywise.Backend\\MonthlyExpense.cs",
+              "RelativeToolTip": "Pennywise.Backend\\MonthlyExpense.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAyAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-18T11:46:44.845Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "CategoryExpense.cs",
+              "DocumentMoniker": "G:\\my-files\\GhofGhof\\depi\\mini-project\\Pennywise\\Pennywise.Backend\\CategoryExpense.cs",
+              "RelativeDocumentMoniker": "Pennywise.Backend\\CategoryExpense.cs",
+              "ToolTip": "G:\\my-files\\GhofGhof\\depi\\mini-project\\Pennywise\\Pennywise.Backend\\CategoryExpense.cs",
+              "RelativeToolTip": "Pennywise.Backend\\CategoryExpense.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-18T11:34:41.589Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "DashboardSummary.cs",
+              "DocumentMoniker": "G:\\my-files\\GhofGhof\\depi\\mini-project\\Pennywise\\Pennywise.Backend\\DashboardSummary.cs",
+              "RelativeDocumentMoniker": "Pennywise.Backend\\DashboardSummary.cs",
+              "ToolTip": "G:\\my-files\\GhofGhof\\depi\\mini-project\\Pennywise\\Pennywise.Backend\\DashboardSummary.cs",
+              "RelativeToolTip": "Pennywise.Backend\\DashboardSummary.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAIwAkAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-18T11:01:18.016Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "Database.cs",
+              "DocumentMoniker": "G:\\my-files\\GhofGhof\\depi\\mini-project\\Pennywise\\Pennywise.Backend\\Database.cs",
+              "RelativeDocumentMoniker": "Pennywise.Backend\\Database.cs",
+              "ToolTip": "G:\\my-files\\GhofGhof\\depi\\mini-project\\Pennywise\\Pennywise.Backend\\Database.cs",
+              "RelativeToolTip": "Pennywise.Backend\\Database.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAQwBAAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-17T22:20:32.774Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
