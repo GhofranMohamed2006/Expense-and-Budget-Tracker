@@ -13,7 +13,7 @@
 .strength-bar-track {
   height: 4px;
   width: 100%;
-  background-color: #E2E8F0;
+  background-color: var(--color-card);
   border-radius: var(--radius-pill);
   overflow: hidden;
   display: flex;
@@ -23,9 +23,9 @@
 .strength-segment {
   height: 100%;
   flex: 1;
-  background-color: transparent;
+  background-color: var(--color-primary);
   border-radius: var(--radius-pill);
-  transition: background-color 0.25s ease;
+  transition: none;
 }
 
 .strength-label-row {
@@ -41,20 +41,20 @@
 }
 
 /* Strength levels colors */
-.strength-weak .strength-segment:nth-child(1) { background-color: #EF4444; }
-.strength-weak .strength-text { color: #EF4444; }
+.strength-weak .strength-segment:nth-child(1) { background-color: var(--color-primary); }
+.strength-weak .strength-text { color: var(--color-secondary-text); }
 
 .strength-fair .strength-segment:nth-child(1),
-.strength-fair .strength-segment:nth-child(2) { background-color: #F59E0B; }
-.strength-fair .strength-text { color: #F59E0B; }
+.strength-fair .strength-segment:nth-child(2) { background-color: var(--color-primary); }
+.strength-fair .strength-text { color: var(--color-secondary-text); }
 
 .strength-good .strength-segment:nth-child(1),
 .strength-good .strength-segment:nth-child(2),
-.strength-good .strength-segment:nth-child(3) { background-color: #3B82F6; }
-.strength-good .strength-text { color: #3B82F6; }
+.strength-good .strength-segment:nth-child(3) { background-color: var(--color-primary); }
+.strength-good .strength-text { color: var(--color-secondary-text); }
 
-.strength-strong .strength-segment { background-color: #10B981; }
-.strength-strong .strength-text { color: #10B981; }
+.strength-strong .strength-segment { background-color: var(--color-primary); }
+.strength-strong .strength-text { color: var(--color-secondary-text); }
 
 /* Password Rules Checklist */
 .password-requirements {
@@ -64,34 +64,35 @@
   gap: 4px 12px;
   margin-top: 8px;
   padding: 8px 12px;
-  background-color: #F8FAFC;
+  background-color: var(--color-card);
+  border: var(--border-width) solid var(--color-muted);
   border-radius: var(--radius-sm);
   font-size: 11.5px;
-  color: #64748B;
+  color: var(--color-secondary-text);
 }
 
 .rule-item {
   display: flex;
   align-items: center;
   gap: 6px;
-  transition: color var(--transition-fast);
+  transition: none;
 }
 
 .rule-dot {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background-color: #CBD5E1;
-  transition: background-color var(--transition-fast);
+  background-color: var(--color-card);
+  transition: none;
 }
 
 .rule-item.valid {
-  color: #15803D;
+  color: var(--color-secondary-text);
   font-weight: 600;
 }
 
 .rule-item.valid .rule-dot {
-  background-color: #16A34A;
+  background-color: var(--color-form-accent);
 }
 
 /* --------------------------------------------------------------------------
@@ -100,20 +101,20 @@
 .modal-backdrop {
   position: fixed;
   inset: 0;
-  background-color: rgba(15, 23, 42, 0.45);
+  background-color: var(--color-muted);
   backdrop-filter: blur(4px);
   z-index: 1000;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 20px;
-  opacity: 0;
+  visibility: hidden;
   pointer-events: none;
-  transition: opacity 0.25s ease;
+  transition: visibility 0.25s ease;
 }
 
 .modal-backdrop.show {
-  opacity: 1;
+  visibility: visible;
   pointer-events: auto;
 }
 
@@ -121,7 +122,8 @@
   width: 100%;
   max-width: 580px;
   max-height: 85vh;
-  background-color: #FFFFFF;
+  background-color: var(--color-card);
+  border: var(--border-width) solid var(--color-muted);
   border-radius: var(--radius-xl);
   box-shadow: var(--shadow-modal);
   display: flex;
@@ -137,7 +139,7 @@
 
 .modal-header {
   padding: 20px 24px;
-  border-bottom: 1px solid #E2E8F0;
+  border-bottom: 1px solid var(--color-muted);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -150,11 +152,11 @@
 }
 
 .modal-close-btn {
-  background: transparent;
+  background: var(--color-muted);
   border: none;
   font-size: 24px;
   line-height: 1;
-  color: #64748B;
+  color: var(--color-secondary-text);
   cursor: pointer;
   padding: 4px;
   border-radius: var(--radius-sm);
@@ -164,15 +166,15 @@
 }
 
 .modal-close-btn:hover {
-  color: #1E293B;
-  background-color: #F1F5F9;
+  color: var(--color-secondary-text);
+  background-color: var(--color-form-accent);
 }
 
 .modal-body {
   padding: 24px;
   overflow-y: auto;
   font-size: 13.5px;
-  color: #334155;
+  color: var(--color-secondary-text);
   line-height: 1.6;
   display: flex;
   flex-direction: column;
@@ -182,25 +184,25 @@
 .modal-body h4 {
   font-size: 14px;
   font-weight: 700;
-  color: #0F172A;
+  color: var(--color-secondary-text);
   margin-top: 6px;
 }
 
 .modal-footer {
   padding: 16px 24px;
-  border-top: 1px solid #E2E8F0;
+  border-top: 1px solid var(--color-muted);
   display: flex;
   justify-content: flex-end;
   gap: 12px;
-  background-color: #F8FAFC;
+  background-color: var(--color-card);
 }
 
 .btn-secondary {
   padding: 10px 18px;
   border-radius: var(--radius-md);
-  border: 1px solid #CBD5E1;
-  background-color: #FFFFFF;
-  color: #475569;
+  border: var(--border-width) solid var(--color-muted);
+  background-color: var(--color-form-accent);
+  color: var(--color-secondary-text);
   font-family: inherit;
   font-size: 14px;
   font-weight: 600;
@@ -208,5 +210,5 @@
 }
 
 .btn-secondary:hover {
-  background-color: #F1F5F9;
+  background-color: var(--color-card);
 }
