@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Pennywise – Settings & Categories</title>
+<title>Pennywise â€“ Settings & Categories</title>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.1/dist/umd/lucide.min.js"></script>
 <style>
@@ -159,7 +159,7 @@ const load=(k,d)=>{try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}
 const save=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
 
 /* ---------- API ---------- */
-const API='http://localhost:5000'; // change if your backend runs on another port
+const API=window.location.origin; // change if your backend runs on another port
 let token=null;try{token=localStorage.getItem('pw_token')}catch(e){}
 async function api(path,{method='GET',body}={}){
   let res;
@@ -335,7 +335,7 @@ function catBind(){
   $('#view').querySelectorAll('[data-ed]').forEach(b=>b.onclick=()=>catForm(cats.find(c=>c.id==b.dataset.ed)));
   $('#view').querySelectorAll('[data-del]').forEach(b=>b.onclick=()=>{
     const c=cats.find(x=>x.id==b.dataset.del);
-    openModal(`<h3>Delete “${esc(c.n)}”?</h3><p class="sub">${c.tx} transactions use this category. This cannot be undone.</p><div class="actions"><button class="btn dng" id="yes">Delete category</button><button class="btn sec" id="no">Cancel</button></div>`);
+    openModal(`<h3>Delete â€œ${esc(c.n)}â€?</h3><p class="sub">${c.tx} transactions use this category. This cannot be undone.</p><div class="actions"><button class="btn dng" id="yes">Delete category</button><button class="btn sec" id="no">Cancel</button></div>`);
     $('#no').onclick=closeModal;$('#yes').onclick=async()=>{try{await api('/api/categories/'+c.id,{method:'DELETE'});await loadCats();closeModal();render(true)}catch(e){$('#box').querySelector('.sub').textContent=e.message}};
   });
 }
@@ -363,3 +363,4 @@ applyTheme();render();if(token)loadAll();
 </script>
 </body>
 </html>
+
