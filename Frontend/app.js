@@ -302,7 +302,7 @@ async function renderCategories() {
     </section><form class="card" id="category-form"><h2 id="category-form-title">New category</h2>
       <div class="field"><label for="category-name">Name</label><input id="category-name" maxlength="30" required></div>
       <div class="field" style="margin-top:12px"><label for="category-type">Type</label><select id="category-type"><option value="expense">Expense</option><option value="income">Income</option></select></div>
-      <div class="field" style="margin-top:12px"><label for="category-icon">Icon key</label><input id="category-icon" value="tags" maxlength="40" pattern="[a-z0-9-]+" required></div>
+      <div class="field" style="margin-top:12px"><label for="category-icon">Icon key</label><input id="category-icon" value="tags" maxlength="40" pattern="[a-z0-9\-]+" required></div>
       <div class="field" style="margin-top:12px"><label for="category-color">Color</label><input id="category-color" type="number" min="0" max="6" value="0" required></div>
       <div class="actions"><button class="button">Save category</button><button class="button secondary" id="cancel-category" type="button" hidden>Cancel</button></div>
     </form></div>`;
