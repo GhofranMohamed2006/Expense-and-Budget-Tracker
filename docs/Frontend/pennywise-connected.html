@@ -21,7 +21,24 @@ button,input,select{font:inherit;color:inherit}
 .nav{display:flex;flex-direction:column;gap:4px;flex:1}
 .nav a{display:flex;align-items:center;gap:12px;padding:11px 12px;border-radius:10px;color:var(--color-card);text-decoration:none;font-weight:500;cursor:pointer;border:0;background:none;text-align:left}
 .nav a:hover{background:var(--color-primary);color:var(--color-card)}
-.nav a.active{background:var(--blue);color:var(--color-card)}
+
+.nav a{
+  border: 1px solid transparent;
+  transition: background .2s, border-color .2s;
+}
+
+.nav a.active{
+  background: var(--color-primary);
+  color: var(--color-card);
+  border: 1px solid var(--color-card);
+  box-shadow: inset 4px 0 0 var(--color-card);
+}
+
+.nav a:focus-visible{
+  outline: 2px solid var(--color-card);
+  outline-offset: 3px;
+}
+
 .nav svg,.nav i{width:18px;height:18px}
 .main{margin-left:240px;padding:28px 36px 48px;max-width:1240px}
 .top{display:flex;align-items:flex-start;gap:14px;margin-bottom:22px;flex-wrap:wrap}
@@ -141,7 +158,9 @@ function drawNav(){
 $('#nav').addEventListener('click',e=>{
   const a=e.target.closest('a');if(!a)return;
   const k=a.dataset.k;closeSide();
-  if(k==='settings'||k==='categories'){location.hash='/'+k}
+  if(['settings','categories','transactions'].includes(k)){
+  location.hash='/'+k;
+}
   else if(k==='logout')logout();
   else flashNote('This page is outside the prototype.');
 });
@@ -159,7 +178,7 @@ const load=(k,d)=>{try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}
 const save=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
 
 /* ---------- API ---------- */
-const API=window.location.origin; // change if your backend runs on another port
+const API='http://localhost:5248'; // change if your backend runs on another port
 let token=null;try{token=localStorage.getItem('pw_token')}catch(e){}
 async function api(path,{method='GET',body}={}){
   let res;
@@ -177,15 +196,75 @@ const fmtDate=d=>new Date(d).toLocaleDateString('en-GB',{day:'numeric',month:'lo
 const mapProfile=r=>({name:r.fullName,email:r.email,phone:r.phone||'',country:r.country||'',created:fmtDate(r.createdAt)});
 const mapCat=c=>({id:c.id,n:c.name,t:c.type,i:c.icon,c:c.colorIndex,tx:c.transactionCount});
 async function loadCats(){cats=(await api('/api/categories')).map(mapCat)}
+
+/* ---------- Transactions API ---------- */
+let transactions = [];
+
+function mapTransaction(t){
+  return {
+    id: t.id,
+    categoryId: t.categoryId,
+    categoryName: t.categoryName || '',
+    type: t.type,
+    amount: Number(t.amount),
+    date: t.date,
+    note: t.note || ''
+  };
+}
+
+async function loadTransactions(){
+  try{
+    transactions = (await api('/api/transactions')).map(mapTransaction);
+
+    if(route === 'transactions'){
+      render(true);
+    }
+  }catch(e){
+    msg = ['no', e.message];
+
+    if(route === 'transactions'){
+      render(true);
+    }
+  }
+}
+
+
 async function loadAll(){
   try{
-    const[p,pr]=await Promise.all([api('/api/settings/profile'),api('/api/settings/preferences')]);
-    profile=mapProfile(p);draft={...profile};
-    prefs={currency:pr.currency,lang:pr.language,theme:pr.theme,date:pr.dateFormat,emailN:pr.emailNotifications,budgetN:pr.budgetAlerts,monthly:pr.monthlySummary};prefDraft={...prefs};
-    await loadCats();applyTheme();
-  }catch(e){msg=['no',e.message]}
+    const [p, pr] = await Promise.all([
+      api('/api/settings/profile'),
+      api('/api/settings/preferences')
+    ]);
+
+    profile = mapProfile(p);
+    draft = {...profile};
+
+    prefs = {
+      currency: pr.currency,
+      lang: pr.language,
+      theme: pr.theme,
+      date: pr.dateFormat,
+      emailN: pr.emailNotifications,
+      budgetN: pr.budgetAlerts,
+      monthly: pr.monthlySummary
+    };
+
+    prefDraft = {...prefs};
+
+    await loadCats();
+    applyTheme();
+
+  }catch(e){
+    msg = ['no', e.message];
+  }
+
   render(true);
+
+  if(token && route === 'transactions'){
+    await loadTransactions();
+  }
 }
+
 let authMode='login',authErr='';
 function authRender(){
   const r=authMode==='register';
@@ -340,24 +419,307 @@ function catBind(){
   });
 }
 
+/* ---------- Transactions ---------- */
+
+function transactionView(){
+  const totalIncome = transactions
+    .filter(t => t.type.toLowerCase() === 'income')
+    .reduce((sum, t) => sum + t.amount, 0);
+
+  const totalExpense = transactions
+    .filter(t => t.type.toLowerCase() === 'expense')
+    .reduce((sum, t) => sum + t.amount, 0);
+
+  const money = amount => new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: prefs.currency || 'EGP'
+  }).format(amount);
+
+  const rows = transactions.map(t => `
+    <tr>
+      <td>${esc(t.date ? t.date.slice(0,10) : '')}</td>
+      <td>${esc(t.note || '—')}</td>
+      <td>${esc(t.categoryName || 'Uncategorized')}</td>
+      <td>${t.type.toLowerCase() === 'income' ? 'Income' : 'Expense'}</td>
+      <td style="font-weight:700;white-space:nowrap">
+        ${t.type.toLowerCase() === 'income' ? '+' : '−'}${money(t.amount)}
+      </td>
+      <td>
+        <button class="ib d" data-txdel="${esc(t.id)}"
+          aria-label="Delete transaction">
+          <i data-lucide="trash-2"></i>
+        </button>
+      </td>
+    </tr>
+  `).join('');
+
+  return `
+    ${toast()}
+    <div class="grid" style="margin-bottom:20px">
+      <div class="card">
+        <span class="hint">Total income</span>
+        <h2 style="margin:8px 0 0">${money(totalIncome)}</h2>
+      </div>
+      <div class="card">
+        <span class="hint">Total expenses</span>
+        <h2 style="margin:8px 0 0">${money(totalExpense)}</h2>
+      </div>
+      <div class="card">
+        <span class="hint">Net balance</span>
+        <h2 style="margin:8px 0 0">${money(totalIncome-totalExpense)}</h2>
+      </div>
+    </div>
+
+    <div class="card">
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:16px">
+        <h2 style="margin:0;font-size:18px">All transactions</h2>
+        <button class="btn pri" id="addTx">
+          <i data-lucide="plus"></i>Add transaction
+        </button>
+      </div>
+
+      ${transactions.length ? `
+        <div style="overflow-x:auto">
+          <table style="width:100%;border-collapse:collapse;text-align:left;min-width:650px">
+            <thead>
+              <tr>
+                ${['Date','Note','Category','Type','Amount','Action'].map(h =>
+                  `<th style="padding:12px 10px;border-bottom:1px solid var(--line)">${h}</th>`
+                ).join('')}
+              </tr>
+            </thead>
+            <tbody>
+              ${rows.replace(/<tr>/g, '<tr>').replace(/<td>/g, '<td style="padding:12px 10px;border-bottom:1px solid var(--line)">')}
+            </tbody>
+          </table>
+        </div>
+      ` : `
+        <div class="empty">
+          No transactions yet. Select “Add transaction” to create your first one.
+        </div>
+      `}
+    </div>
+  `;
+}
+
+function transactionForm(){
+  const draw = (type='expense') => {
+    const availableCats = cats.filter(c => c.t === type);
+
+    openModal(`
+      <h3>Add transaction</h3>
+
+      <form id="txForm">
+        <div class="f">
+          <label for="txType">Transaction type</label>
+          <select class="inp" id="txType">
+            <option value="expense" ${type==='expense'?'selected':''}>Expense</option>
+            <option value="income" ${type==='income'?'selected':''}>Income</option>
+          </select>
+        </div>
+
+        <div class="f" style="margin-top:14px">
+          <label for="txCategory">Category</label>
+          <select class="inp" id="txCategory" required>
+            <option value="">Select a category</option>
+            ${availableCats.map(c =>
+              `<option value="${esc(c.id)}">${esc(c.n)}</option>`
+            ).join('')}
+          </select>
+          ${availableCats.length ? '' : '<span class="hint">No categories of this type. Add one from Categories first.</span>'}
+        </div>
+
+        <div class="f" style="margin-top:14px">
+          <label for="txAmount">Amount</label>
+          <input class="inp" id="txAmount" type="number"
+            min="0.01" step="0.01" required placeholder="0.00">
+        </div>
+
+        <div class="f" style="margin-top:14px">
+          <label for="txDate">Date</label>
+          <input class="inp" id="txDate" type="date"
+            value="${new Date().getFullYear()}-${String(new Date().getMonth()+1).padStart(2,'0')}-${String(new Date().getDate()).padStart(2,'0')}"
+            required>
+        </div>
+
+        <div class="f" style="margin-top:14px">
+          <label for="txNote">Note (optional)</label>
+          <input class="inp" id="txNote" maxlength="250"
+            placeholder="What was this transaction for?">
+        </div>
+
+        <div class="err" id="txError" style="margin-top:10px"></div>
+
+        <div class="actions">
+          <button class="btn pri" type="submit" ${availableCats.length ? '' : 'disabled'}>
+            Save transaction
+          </button>
+          <button class="btn sec" type="button" id="txCancel">Cancel</button>
+        </div>
+      </form>
+    `);
+
+    $('#txCancel').onclick = closeModal;
+
+    $('#txType').onchange = () => {
+      const nextType = $('#txType').value;
+      draw(nextType);
+    };
+
+    $('#txForm').onsubmit = async e => {
+      e.preventDefault();
+
+      const categoryId = $('#txCategory').value;
+      const amount = Number($('#txAmount').value);
+      const date = $('#txDate').value;
+      const note = $('#txNote').value.trim();
+      const error = $('#txError');
+
+      if(!categoryId){
+        error.textContent = 'Please select a category.';
+        return;
+      }
+
+      if(!Number.isFinite(amount) || amount <= 0){
+        error.textContent = 'Amount must be greater than zero.';
+        return;
+      }
+
+      if(!date){
+        error.textContent = 'Please select a date.';
+        return;
+      }
+
+      const submitButton = $('#txForm').querySelector('[type="submit"]');
+      submitButton.disabled = true;
+      error.textContent = '';
+
+      try{
+        await api('/api/transactions', {
+          method: 'POST',
+          body: {
+            type: $('#txType').value,
+            categoryId: Number(categoryId),
+            amount,
+            date,
+            note
+          }
+        });
+
+        closeModal();
+        msg = ['ok', 'Transaction added successfully.'];
+        await loadTransactions();
+      }catch(err){
+        error.textContent = err.message;
+        submitButton.disabled = false;
+      }
+    };
+  };
+
+  draw();
+}
+
+function transactionBind(){
+  $('#addTx').onclick = transactionForm;
+
+  $('#view').querySelectorAll('[data-txdel]').forEach(button => {
+    button.onclick = () => {
+      const id = button.dataset.txdel;
+
+      openModal(`
+        <h3>Delete transaction?</h3>
+        <p class="sub">This action cannot be undone.</p>
+        <div class="actions">
+          <button class="btn dng" id="confirmTxDelete">Delete</button>
+          <button class="btn sec" id="cancelTxDelete">Cancel</button>
+        </div>
+        <div class="err" id="deleteTxError"></div>
+      `);
+
+      $('#cancelTxDelete').onclick = closeModal;
+
+      $('#confirmTxDelete').onclick = async () => {
+        const confirmButton = $('#confirmTxDelete');
+        confirmButton.disabled = true;
+
+        try{
+          await api('/api/transactions/' + encodeURIComponent(id), {
+            method: 'DELETE'
+          });
+
+          closeModal();
+          msg = ['ok', 'Transaction deleted successfully.'];
+          await loadTransactions();
+        }catch(err){
+          $('#deleteTxError').textContent = err.message;
+          confirmButton.disabled = false;
+        }
+      };
+    };
+  });
+}
+
 /* ---------- router ---------- */
+
 function render(keep){
   document.body.classList.toggle('noauth',!token);
-  if(!token){authRender();return}
-  route=location.hash.includes('categories')?'categories':'settings';
-  drawNav();
-  if(route==='settings'){
-    $('#crumb').textContent='Pennywise / Settings';$('#title').textContent='Settings';$('#sub').textContent='Manage your account and preferences.';$('#topAction').innerHTML='';
-    $('#view').innerHTML=settingsView();settingsBind();
-  }else{
-    $('#crumb').textContent='Pennywise / Categories';$('#title').textContent='Categories';$('#sub').textContent='Manage your income and expense categories.';
-    $('#topAction').innerHTML='<button class="btn pri" id="addC"><i data-lucide="plus"></i>Add category</button>';
-    $('#addC').onclick=()=>catForm();
-    $('#view').innerHTML=categoriesView();catBind();
+
+  if(!token){
+    authRender();
+    return;
   }
+
+  route = location.hash.includes('transactions')
+    ? 'transactions'
+    : location.hash.includes('categories')
+      ? 'categories'
+      : 'settings';
+
+  drawNav();
+
+  if(route === 'settings'){
+    $('#crumb').textContent = 'Pennywise / Settings';
+    $('#title').textContent = 'Settings';
+    $('#sub').textContent = 'Manage your account and preferences.';
+    $('#topAction').innerHTML = '';
+    $('#view').innerHTML = settingsView();
+    settingsBind();
+
+  } else if(route === 'categories'){
+    $('#crumb').textContent = 'Pennywise / Categories';
+    $('#title').textContent = 'Categories';
+    $('#sub').textContent = 'Manage your income and expense categories.';
+    $('#topAction').innerHTML =
+      '<button class="btn pri" id="addC"><i data-lucide="plus"></i>Add category</button>';
+
+    $('#addC').onclick = () => catForm();
+    $('#view').innerHTML = categoriesView();
+    catBind();
+
+  
+} else if(route === 'transactions'){
+  $('#crumb').textContent = 'Pennywise / Transactions';
+  $('#title').textContent = 'Transactions';
+  $('#sub').textContent = 'Track your income and expenses.';
+  $('#topAction').innerHTML = '';
+  $('#view').innerHTML = transactionView();
+  transactionBind();
+}
+
+
   icons();
 }
-window.addEventListener('hashchange',()=>{msg=null;render()});
+
+
+window.addEventListener('hashchange', async () => {
+  msg = null;
+  render();
+
+  if(token && route === 'transactions'){
+    await loadTransactions();
+  }
+});
+
 if(load('pw_hide',false))document.body.classList.add('hide');
 applyTheme();render();if(token)loadAll();
 </script>
